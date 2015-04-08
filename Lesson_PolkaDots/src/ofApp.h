@@ -25,6 +25,7 @@ public:
     float counter, LineEnd, LineStart;
     
       void drawPinkPolkaCircle(float xPos, float yPos, float scale);
+    // when do i use these floats? 
     
     
     ofPtr<ofCairoRenderer> cairo;

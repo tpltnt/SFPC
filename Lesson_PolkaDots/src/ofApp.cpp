@@ -6,29 +6,32 @@ void ofApp::drawPinkPolkaCircle(float xPos, float yPos, float scale){
     
     
     ofPushMatrix(); // we're going to push this thing
-    ofTranslate(xPos, yPos); // push it this far
+    ofTranslate(xPos, yPos); // push it this far. Why is this a variable and not a fixed number?
     ofScale(scale, scale); //scale it this much
+    
     
     float CircCenterBX, CircCenterBY, CircRadius;
     CircCenterBX = 0;
     CircCenterBY = 0;
-    CircRadius = 100;
+    CircRadius = 100; // why am i defining this here?
 
     
     ofSetColor(0);
     ofNoFill();
     ofSetLineWidth(6);
-    ofCircle(CircCenterBX,CircCenterBY,CircRadius); // centerx, centery, radius
+    ofCircle(CircCenterBX,CircCenterBY,CircRadius); // centerx, centery, radius - this is drawing the black outline to be at 0,0,100 radius
     
-    ofSetColor( ofColor::pink);
+    ofSetColor( ofColor::pink); //now i'm doing the polka dots
     ofFill();
     
-        for (int i = 0; i < ofGetHeight(); i = i + 20){
-        for (int k = 0; k < ofGetWidth(); k = k + 20){
-            float circleX = CircCenterBY;
-            float circleY = CircCenterBX;
-            float circleRadius = CircRadius;
-            float distance = ofDist(CircCenterBX, CircCenterBY, i, k);
+    
+    float circleX = CircCenterBY;
+    float circleY = CircCenterBX;
+    float circleRadius = CircRadius;
+    
+        for (int i = 0; i < ofGetHeight(); i = i + 20){ //scoot it over 20 each time
+        for (int k = 0; k < ofGetWidth(); k = k + 20){ //scoot it over 20 each time
+        float distance = ofDist(CircCenterBY, CircCenterBX, i, k);
             if (distance < circleRadius-4){
                 if ((k/20) % 2 == 0) {     // is k even or not ?
                     ofCircle(k,i,4);
@@ -39,7 +42,7 @@ void ofApp::drawPinkPolkaCircle(float xPos, float yPos, float scale){
         }
     }
     
-    
+    //why are these polkadots not filling the circle?
     
 //    ofSetColor(0);
 //    ofNoFill();
@@ -90,15 +93,6 @@ void ofApp::draw(){
     ofFill();
     
 
-//
-//    for (int rows=0; rows<5; rows++) {
-//        for (int cols=0; cols<5; cols++) {
-//            drawPinkPolkaCircle( 200+rows *110, 200+cols*110, 1);
-//            
-//        }
-//    }
-//    
-//  drawPinkPolkaCircle( 0,0, 1);
     
     for (int rows=0; rows<5; rows++) {
         for (int cols=0; cols<10; cols++) {
@@ -137,53 +131,51 @@ void ofApp::draw(){
     ofSetColor( ofColor::lightBlue);
  
     ofPushMatrix();
-    ofTranslate(500, 900);
+    ofTranslate(500, 500);
     ofScale(.5, .5);
-    
+    float triangleX = 100;
     
     if (ofGetFrameNum() % 12 == 0){
         ofTriangle(100,100,150,150,100,200);
     }
     if (ofGetFrameNum() % 12 == 1){
-        ofTriangle(100+20,100,150,150,100,200);
+        ofTriangle(100+20,100,150+20,150,100+20,200);
     }
     if (ofGetFrameNum() % 12 == 2){
-         ofTriangle(100+40,100,150,150,100,200);
-    } if (ofGetFrameNum() % 12 == 3){
-         ofTriangle(100+60,100,150,150,100,200);
-    } if (ofGetFrameNum() % 12 == 4){
-         ofTriangle(100+80,100,150,150,100,200);
-    }  else if (ofGetFrameNum() % 12 == 5){
-         ofTriangle(100+90,100,150,150,100,200);
+         ofTriangle(100+40,100,150+40,150,100+40,200);
     }
-//    }if (ofGetFrameNum() % 12 == 6){
-//             ofTriangle(100,100,150,150,100,200);
-//    } if (ofGetFrameNum() % 12 == 7){
-//        ofTriangle(100,100,150,150,100,200);
-//    } if (ofGetFrameNum() % 12 == 8){
-//        ofTriangle(100,100,150,150,100,200);
-//    } if (ofGetFrameNum() % 12 == 9){
-//        ofTriangle(100,100,150,150,100,200);
-//    } if (ofGetFrameNum() % 12 == 10){
-//        ofTriangle(100,100,150,150,100,200);
-//    } if (ofGetFrameNum() % 12 == 11){
-//        ofTriangle(100,100,150,150,100,200);
-//    }
-        
-//    } else if (ofGetSeconds() <=15){
-//        ofTriangle(100+50,100,150+50,150,100+50,200);
-//    } else {
-//        ofTriangle(100+100,100,150+100,150,100+100,200);
-        
+    if (ofGetFrameNum() % 12 == 3){
+         ofTriangle(100+60,100,150+60,150,100+60,200);
     }
-    //    if (ofGetSeconds() % 3 == 0){
-    //        ofTriangle(100,100,150,150,100,200);
-    //    } else if (ofGetSeconds() % 3 == 1){
-    //        ofTriangle(100+50,100,150+50,150,100+50,200);
-    //    } else {
-    //        ofTriangle(100+100,100,150+100,150,100+100,200);
-    //
-    //    }
+    if (ofGetFrameNum() % 12 == 4){
+         ofTriangle(100+80,100,150+80,150,100+80,200);
+    }
+    if (ofGetFrameNum() % 12 == 5){
+        ofTriangle(100+100,100,150+100,150,100+100,200);
+    }
+    if (ofGetFrameNum() % 12 == 6){
+        ofTriangle(100+140,100,150+140,150,100+140,200);
+    }
+    if (ofGetFrameNum() % 12 == 7){
+        ofTriangle(100+160,100,150+160,150,100+160,200);
+    }
+    if (ofGetFrameNum() % 12 == 8){
+        ofTriangle(100+180,100,150+180,150,100+180,200);
+    }
+    if (ofGetFrameNum() % 12 == 9){
+        ofTriangle(100+200,100,150+200,150,100+200,200);
+    }
+    if (ofGetFrameNum() % 12 == 10){
+        ofTriangle(100+220,100,150+220,150,100+220,200);
+    }
+    if (ofGetFrameNum() % 12 == 11){
+        ofTriangle(100+240,100,150+240,150,100+240,200);
+    }
+    else if (ofGetFrameNum() % 12 == 12){
+         ofTriangle(100+260,100,150+260,150,100+260,200);
+    }
+    
+    
     ofPopMatrix();
     ofNoFill();
     
