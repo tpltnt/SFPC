@@ -4,12 +4,7 @@
 
 #include "ofMain.h"
 
-struct Ball {
-    int x;
-    int y;
-    int vx;
-    int vy;
-};
+
 
 class ofApp : public ofBaseApp{
     
@@ -27,18 +22,29 @@ public:
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
+    
+    void drawTexture(float x, float y, float w, float h,
+                              float tx, float ty, float tw, float th);
         
     void DrawPolkaDotCircle( float xPos, float yPos, float scale);
     
     
-    float counter, LineEnd, LineStart;
+    float LineEnd, LineStart;
     float MyOutlineWidth = 4;
     
       void drawPinkPolkaCircle(float xPos, float yPos, float scale);
     // when do i use these floats?
     
-    Ball whiteBall;
-    Ball yellowBall;
+    ofTrueTypeFont 	NTSAkkhara;
+    ofImage img;
+    char eventString[255];
+    char timeString[255];
+    
+    unsigned long last;
+    int counter;
+    ofColor col;
+    
+
     
     
     ofPtr<ofCairoRenderer> cairo;
@@ -53,6 +59,8 @@ public:
     ofColor Aqua = ofColor :: aquamarine;
     ofColor MedAqua = ofColor :: mediumAquaMarine;
     ofColor Salmon = ofColor :: salmon;
+//    ofColor Yellow = ofColor::fromHex(0xF9FF4B);
+//    ofColor Yellow = ofSetHexColor(0xff0000);
 };
 
 #endif

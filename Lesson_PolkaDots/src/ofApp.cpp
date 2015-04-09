@@ -1,5 +1,21 @@
 #include "ofApp.h"
 
+
+//void ofApp::drawTexture(float x, float y, float w, float h,
+//                          float tx, float ty, float tw, float th) {
+//    
+//    GLfloat verts[] = { x,y,  x+w,y,  x+w,y+h,  x,y+h   };
+//    GLfloat tex_coords[] = { tx,ty,  tx+tw,ty,  tx+tw,ty+th,  tx,ty+th  };
+//    
+//    glEnableClientState( GL_TEXTURE_COORD_ARRAY );
+//    glTexCoordPointer(2, GL_FLOAT, 0, tex_coords );
+//    glEnableClientState(GL_VERTEX_ARRAY);
+//    glVertexPointer(2, GL_FLOAT, 0, verts );
+//    glDrawArrays( GL_TRIANGLE_FAN, 0, 4 );
+//    glDisableClientState( GL_TEXTURE_COORD_ARRAY );
+//    
+//}
+
 void ofApp::drawPinkPolkaCircle(float xPos, float yPos, float scale){
     
     ///pink circle ----------------------------------------
@@ -29,8 +45,8 @@ void ofApp::drawPinkPolkaCircle(float xPos, float yPos, float scale){
     float circleY = CircCenterBX;
     float circleRadius = CircRadius;
     
-        for (int i = 0; i < ofGetHeight(); i = i + 20){ //scoot it over 20 each time
-        for (int k = 0; k < ofGetWidth(); k = k + 20){ //scoot it over 20 each time
+    for (int i = -circleRadius; i < circleRadius; i = i + 20){ //scoot it over 20 each time
+        for (int k = -circleRadius; k < circleRadius; k = k + 20){ //scoot it over 20 each time
         float distance = ofDist(CircCenterBX, CircCenterBY, i, k);
             if (distance < circleRadius-4){
                 if ((k/20) % 2 == 0) {     // is k even or not ?
@@ -52,23 +68,42 @@ void ofApp::drawPinkPolkaCircle(float xPos, float yPos, float scale){
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    
+
+    
+    sprintf(eventString, "HELLO");
+    NTSAkkhara.loadFont("NTSAkkhara.ttf", 52); //font size
+    
+    img.allocate(256, 256, OF_IMAGE_COLOR_ALPHA);
+    img.loadImage("Cage_TenRules.jpg");
+
 
     //    ofEnableAntiAliasing();
     ofSetLineWidth(2);
     
+    last = ofGetElapsedTimeMillis();
+    col.setHsb(0,255,255);
+
+    
+//    Tweenzor::init();
+//    lerpAmount = 255.f;
+//    Tweenzor::add(&lerpAmount, 0.f, 255.f, 0.f, 2.f);
+//    Tweenzor::getTween(&lerpAmount)->setRepeat(-1, true); // wanted to tween between two colors over time
+    
    
-    cairo = ofPtr<ofCairoRenderer>(new ofCairoRenderer);
-    cairo->setup("", ofCairoRenderer::IMAGE, false, false);     // allocate for 2d graphics
-    tex.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
-    opengl = ofGetCurrentRenderer();                            // grab the current renderer
+//    cairo = ofPtr<ofCairoRenderer>(new ofCairoRenderer);
+//    cairo->setup("", ofCairoRenderer::IMAGE, false, false);     // allocate for 2d graphics
+//    tex.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
+//    opengl = ofGetCurrentRenderer();                            // grab the current renderer
     
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    ofSetFrameRate(6);
-    counter =  1.0f;
+    ofSetFrameRate(30);
+//    Tweenzor::update(ofGetElapsedTimeMillis());
+    
     
 }
 
@@ -76,26 +111,66 @@ void ofApp::update(){
 void ofApp::draw(){
     
     
-    //--------------------------------------------------------  draw into cairo
-    ofSetCurrentRenderer(cairo);
-    cairo_set_line_cap(cairo->getCairoContext(), CAIRO_LINE_CAP_ROUND);
-    cairo_set_line_join(cairo->getCairoContext(), CAIRO_LINE_JOIN_ROUND);
-    ofClear(0,0,0, 255);
+    //  ofColor Yellow(0xff0000);
+    ofBackgroundGradient(Pink, Aqua, OF_GRADIENT_LINEAR);
+    
+ //---------this was a crazy experiement to try and get the cylinder length to oscillate-----------
+//    float ConstMove;
+//    float OsConstMove;
+//    float ConstMove2;
+//    float GrowingNumber;
+//    ConstMove = 25 * ofGetElapsedTimef();
+//    ConstMove2 = OsConstMove - 20;
+//    GrowingNumber = 25 * ofGetElapsedTimef();
+//    cout << GrowingNumber << " "<< endl;
+//    if (GrowingNumber <= 100) {
+//        OsConstMove = ConstMove;
+//        }
+//    else if (GrowingNumber >= 100){
+//        OsConstMove = ConstMove2;
+//        }
+//    ofDrawCylinder(mouseX, mouseY, 20, OsConstMove);
+  
+//---------------------------------------------------------------------
+    
+    ofSetColor(255);
+    NTSAkkhara.drawString(eventString, ofGetWidth()/2,50);
+    
+    img.draw(400,400,400,600);
+    
+    
+//    ofSetColor(Pink, Aqua, OF_GRADIENT_LINEAR);
+//    // Sets the background to a linear gradient
+    ofSetColor(Blue);
+    ofCircle(mouseX,mouseY,5);
+    
+    
+    ofSetColor(col);
+    if(ofGetElapsedTimeMillis() - last > 50)
+    {
+        col.setHue(counter % 256);
+        counter ++;
+        last = ofGetElapsedTimeMillis();
+    }
+    ofCircle(200,20*ofGetElapsedTimef(),10);
+    
+
+   
+
 
     
-    ofBackground(255);  // Clear the screen with a black color
+    
+//    //--------------------------------------------------------  draw into cairo
+//    ofSetCurrentRenderer(cairo);
+//    cairo_set_line_cap(cairo->getCairoContext(), CAIRO_LINE_CAP_ROUND);
+//    cairo_set_line_join(cairo->getCairoContext(), CAIRO_LINE_JOIN_ROUND);
+//    ofClear(0,0,0, 255);
+
+    
+//    ofBackground(255);  // Clear the screen with a black color
 
   ofSetColor(Blue);
     ofFill();
-    
-
-    
-//    for (int rows=0; rows<5; rows++) {
-//        for (int cols=0; cols<10; cols++) {
-//            drawPinkPolkaCircle( rows * 100, cols*100, 0.5);
-//            
-//        }
-//    }
     
     
     ofPushMatrix();
@@ -107,7 +182,13 @@ void ofApp::draw(){
     
     ofPushMatrix();
     ofTranslate(350, 0);
-    ofSetColor(Blue);
+//    ofSetColor(Blue);
+//    float lerpAmount = 0.0f ;
+//    Tweenzor::add ( &lerpAmount , lerpAmount, 1.0f , 0.0f , 1.0f ) ;
+//    ofColor lerpColor = Pink.lerp( Blue , lerpAmount ) ;
+//    ofSetColor (  lerpColor )
+//    ofColor inBetween = Aqua.lerp( Blue , 0.5f ) ;
+
     ofFill();
     ofRect(0,0,25,50);
     ofRect(75, 0, 25, 50);
@@ -148,40 +229,46 @@ void ofApp::draw(){
     
     /// draw an i --------------------------
     
+    
     ofPushMatrix();
     ofTranslate(150, 00);
     ofNoFill();
     ofSetColor(myOutlines);
     ofSetLineWidth(MyOutlineWidth);
+    
     ofBeginShape();
     ofCurveVertex(10, 100);
-    ofCurveVertex(20, 40);
+    ofCurveVertex(mouseX, mouseY);
     ofCurveVertex(0, 80);
-    ofCurveVertex(40, 20);
-    ofCurveVertex(40, 20);
-    ofCurveVertex(50, 20);
-    ofCurveVertex(90, 90);
-    ofCurveVertex(80, 100);
-    ofCurveVertex(60, 30);
-    ofCurveVertex(60, 30);
-    ofCurveVertex(50, 30);
-     ofCurveVertex(50, 30);
-    ofCurveVertex(10, 100);
-       ofCurveVertex(10, 100);
+      ofCurveVertex(0, 80);
     ofEndShape();
+    
+//    ofBeginShape();
+//    ofCurveVertex(10, 100);
+//    ofCurveVertex(20, 40);
+//    ofCurveVertex(0, 80);
+//    ofCurveVertex(40, 20);
+//    ofCurveVertex(40, 20);
+//    ofCurveVertex(50, 20);
+//    ofCurveVertex(90, 90);
+//    ofCurveVertex(80, 100);
+//    ofCurveVertex(60, 30);
+//    ofCurveVertex(60, 30);
+//    ofCurveVertex(50, 30);
+//     ofCurveVertex(50, 30);
+//    ofCurveVertex(10, 100);
+//       ofCurveVertex(10, 100);
+//    ofEndShape();
     ofPopMatrix();
 
     
     // draw an H
     
-    ofColor colorOne;
-    ofColor colorTwo;
-    
-
-    
     //-------------draw a triangle-------------------
     ofFill();
     ofSetColor(MedAqua);
+    
+    
     
     if (ofGetElapsedTimef() <= 10){
     ofTriangle(10*ofGetElapsedTimef(),100,10*ofGetElapsedTimef()+50,150,10*ofGetElapsedTimef(),200);
@@ -314,15 +401,15 @@ void ofApp::draw(){
     
     
     
-    // ------------------------- finish cairo
-    
-    ofSetCurrentRenderer(opengl);
-    tex.loadData(   cairo->getImageSurfacePixels().getPixels(),
-                 cairo->getImageSurfacePixels().getWidth(),
-                 cairo->getImageSurfacePixels().getHeight(),
-                 GL_BGRA_EXT);
-  
-    tex.draw(0,0);
+//    // ------------------------- finish cairo
+//    
+//    ofSetCurrentRenderer(opengl);
+//    tex.loadData(   cairo->getImageSurfacePixels().getPixels(),
+//                 cairo->getImageSurfacePixels().getWidth(),
+//                 cairo->getImageSurfacePixels().getHeight(),
+//                 GL_BGRA_EXT);
+//  
+//    tex.draw(0,0);
     
     
 }
