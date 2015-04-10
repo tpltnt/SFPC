@@ -25,24 +25,38 @@ public:
     
     void drawTexture(float x, float y, float w, float h,
                               float tx, float ty, float tw, float th);
-        
     void DrawPolkaDotCircle( float xPos, float yPos, float scale);
     
     
     float LineEnd, LineStart;
     float MyOutlineWidth = 4;
     
-      void drawPinkPolkaCircle(float xPos, float yPos, float scale);
-    // when do i use these floats?
+    void drawPinkPolkaCircle(float xPos, float yPos, float scale);
+    void drawanM(float xPos, float yPos, float scale);
+    void drawaU(float xPos, float yPos, float scale);
+    void drawHI(float xPos, float yPos, float scale);
+     void drawanH(float xPos, float yPos, float scale);
+
+    
+    
     
     ofTrueTypeFont 	NTSAkkhara;
-    ofImage img;
-    char eventString[255];
-    char timeString[255];
+    
+    char eventString[255];  // when do i use these floats?
+    char timeString[255];   // whats a char?
     
     unsigned long last;
     int counter;
     ofColor col;
+    int Myradius;
+    int Mousereact;
+    
+    void drawGradient();
+    
+    ofImage imggrad;
+    ofImage FU;
+    ofImage img;
+ 
     
 
     
@@ -59,6 +73,8 @@ public:
     ofColor Aqua = ofColor :: aquamarine;
     ofColor MedAqua = ofColor :: mediumAquaMarine;
     ofColor Salmon = ofColor :: salmon;
+    ofColor Gold = ofColor :: gold;
+    ofColor yellow;
 //    ofColor Yellow = ofColor::fromHex(0xF9FF4B);
 //    ofColor Yellow = ofSetHexColor(0xff0000);
 };
