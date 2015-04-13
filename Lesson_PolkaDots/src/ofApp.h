@@ -37,10 +37,11 @@ public:
     void drawaU(float xPos, float yPos, float scale);
     void drawHI(float xPos, float yPos, float scale);
     void drawanH(float xPos, float yPos, float scale);
+    void drawanL(float xPos, float yPos, float scale);
 
     ofColor col;
     ofColor color;
-    void ofColor_::getHsb(float &hue, float &saturation, float &brightness);
+
     
     char eventString[255];  // when do i use these floats?
     char eventStringB[255];  // when do i use these floats?

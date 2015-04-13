@@ -143,20 +143,39 @@ ofPushMatrix(); // we're going to push this thing
     ofVertex(0,0);
     ofEndShape();
 
-    
-    ofPushMatrix();
+ofPushMatrix();
         ofTranslate(110, 0);
         ofBeginShape();
         ofVertex(0,0);
-        ofVertex(40, 0);
-        ofVertex(40+Mousereact,100);
+        ofVertex(30, 0);
+        ofVertex(30+Mousereact,100);
         ofVertex(0+Mousereact,100);
         ofVertex(0,0);
         ofEndShape();
         ofPopMatrix();
-    
 ofPopMatrix();
 }
+
+void ofApp::drawanL(float xPos, float yPos, float scale){
+    
+ofPushMatrix(); // we're going to push this thing
+    ofTranslate(xPos, yPos); // push it this far. Why is this a variable and not a fixed number?
+    ofScale(scale, scale); //scale it this much
+    ofNoFill();
+    ofSetColor(myOutlines);
+    ofSetLineWidth(MyOutlineWidth);
+    ofBeginShape();
+    ofVertex(0,0);
+    ofVertex(30, 0);
+    ofVertex(30+(Mousereact/1.4),70);
+    ofVertex(90+(Mousereact),70);
+    ofVertex(90+Mousereact,100); // moved Mousereact parameters to update. Was this a good idea?
+    ofVertex(0+Mousereact,100);
+    ofVertex(0,0);
+    ofEndShape();
+ofPopMatrix();
+}
+
 
 //--------------------------draw a U--------
 void ofApp::drawaU(float xPos, float yPos, float scale){
@@ -278,7 +297,7 @@ void ofApp::update(){
     ofSetCircleResolution(50);
 //    Tweenzor::update(ofGetElapsedTimeMillis());
     
-    float skewFactor = .5;
+    float skewFactor = .1;
     Mousereact = ((ofGetWidth()/2) - mouseX) * skewFactor;
     ofMap(mouseX, 0, ofGetWidth(), -5, 5);   // true = stay in range of 0-1 // float value, float inputMin, float inputMax, float outputMin, float outputMax)
 //    
@@ -290,19 +309,73 @@ void ofApp::update(){
 //    }
 }
 
-//--------------------------------------------------------------
+//-----------DRAW---------------DRAW----------------DRAW-----------DRAW---------------DRAW---------DRAW-------------
 void ofApp::draw(){
     
     ofBackgroundGradient(Gold, Aqua, OF_GRADIENT_LINEAR);
     
-    ofFill();
+        ofFill();
     ofSetColor(MedAqua);
     if (ofGetElapsedTimef() <= 10){
         ofTriangle(10*ofGetElapsedTimef(),100,10*ofGetElapsedTimef()+50,150,10*ofGetElapsedTimef(),200);
     }
+ 
+//-----------mesh------square--------slowly---------dropping-----------------------------------------------------
+    ofPushMatrix();
+    //  ofRotate(2*ofGetElapsedTimef());
+    ofTranslate(-200, -600+2*ofGetElapsedTimef());
+    ofScale(7,7);
+    
+    ofMesh tempMesh;
+    tempMesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+    
+    tempMesh.addVertex( ofPoint(100,100));
+    tempMesh.addColor(Gold);
+    
+    tempMesh.addVertex( ofPoint(200,100));
+    tempMesh.addColor(Gold);
+    
+    tempMesh.addVertex( ofPoint(100,200));
+    tempMesh.addColor(Aqua);
+    
+    tempMesh.addVertex( ofPoint(200,200));
+    tempMesh.addColor(Aqua);
+    
+    tempMesh.draw();
+    ofPopMatrix();
 
+    
+//-----------------------bg ball drops----------------------------------------------------------------------
+    ofSetColor(col);
+    if(ofGetElapsedTimeMillis() - last > 50)
+        col.setHue(counter % 256); // what does the division sign do?
+    counter ++;
+    last = ofGetElapsedTimeMillis();
+    ofFill();
+    float rando = ofRandom(0, 100); // random number from 0 to 100
+    
+    for (int l = 0; l<30; l++) {
+        for (int m = 0; m<10; m++) {
+            ofCircle(500*m,-1000+20*ofGetElapsedTimef()+(l*500),Myradius*2);
+        }
+    }
+    
+    for (int n = 0; n<30; n++) {
+        for (int nb = 0; nb<10; nb++) {
+            ofCircle(250+500*nb,-250+20*ofGetElapsedTimef()+(n*500),Myradius);
+        }
+    }
+
+    
+//---------------------------black box at bottom of screen-------------------------------------------
+    ofSetColor(0);
+    ofRect(0,ofGetHeight()-100,ofGetWidth(),100);
+
+
+//-----------------------------Circle nav------------------------------------
+    ofColor myColor;    // create a color variable
     int randomNumber = (int) ofRandom(0,100);
-    float navcirc;
+    int navcirc;
     int addcolor = 0;
     float distance = 100;
     int circlesTotal = 10;
@@ -310,40 +383,18 @@ void ofApp::draw(){
     int addedcolorG = 100;
     int addedcolorB = 100;
     for (navcirc = 0; navcirc < circlesTotal; navcirc++) {
-        ofSetColor(5+randomNumber, 50+randomNumber, 50+randomNumber);
+        ofSetColor(myColor);    // set the draw color to this.
+        myColor.setHsb(ofMap(navcirc, 0, circlesTotal, 0, 255), 190, 255);     // set it's color via hsb, map navcirc to 0 to 255 (ie, go one way around the circle during the for loop)
         ofCircle(-60*navcirc+ofGetWidth()-40,ofGetHeight()-60,20);
         int currentCircle = circlesTotal - navcirc;
-        ofSetColor(255);
+        ofSetColor(0);
         NTSAkkhara.drawString(ofToString(currentCircle), -60*navcirc+ofGetWidth()-50,ofGetHeight()-50);
         }
-  
     
-    //------mesh----------------------------------
-ofPushMatrix();
-//  ofRotate(2*ofGetElapsedTimef());
-    ofTranslate(-200, -600+2*ofGetElapsedTimef());
-    ofScale(7,7);
 
-        ofMesh tempMesh;
-        tempMesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
-    
-        tempMesh.addVertex( ofPoint(100,100));
-        tempMesh.addColor(Gold);
-    
-        tempMesh.addVertex( ofPoint(200,100));
-        tempMesh.addColor(Gold);
-    
-        tempMesh.addVertex( ofPoint(100,200));
-        tempMesh.addColor(Aqua);
-    
-        tempMesh.addVertex( ofPoint(200,200));
-        tempMesh.addColor(Aqua);
-    
-        tempMesh.draw();
-ofPopMatrix();
     
     
- //---------this was a failed experiement to try and get the cylinder length to oscillate-----------
+//---------this was a failed experiement to try and get the cylinder length to oscillate-----------
 //    float ConstMove;
 //    float OsConstMove;
 //    float ConstMove2;
@@ -360,28 +411,9 @@ ofPopMatrix();
 //        }
 //    ofDrawCylinder(mouseX, mouseY, 20, OsConstMove);
     
-
-    //-------bg ball drops-------------------------------------------
-    ofSetColor(col);
-    if(ofGetElapsedTimeMillis() - last > 50)
-        col.setHue(counter % 256); // what does the division sign do?
-        counter ++;
-        last = ofGetElapsedTimeMillis();
-        ofFill();
-        float rando = ofRandom(0, 100); // random number from 0 to 100
-
-    for (int l = 0; l<30; l++) {
-        for (int m = 0; m<10; m++) {
-            ofCircle(500*m,-1000+20*ofGetElapsedTimef()+(l*500),Myradius*2);
-            }
-        }
     
-    for (int n = 0; n<30; n++) {
-            for (int nb = 0; nb<10; nb++) {
-                ofCircle(250+500*nb,-250+20*ofGetElapsedTimef()+(n*500),Myradius);
-            }
-        }
-
+    
+   
 //--------------------main draw stuff-------------------------
     
 ofSetColor(255);
@@ -394,11 +426,13 @@ FU.draw(mouseX, mouseY, 40,40); // draw afuck you sign
 
 ofPushMatrix();
     ofTranslate(400, 200);
-    drawaPolkaDotO(500, 50, 0.5);
+    drawaPolkaDotO(750, 50, 0.5);
     drawHI(270, 00, 1);
     drawanH(900, 00, 1);
     drawanM(100, 00, 1);
-    drawaU(500, 00, 1);
+    drawanL(350, 00, 1);
+    drawanL(450, 00, 1);
+    
 ofPopMatrix();
     
    
