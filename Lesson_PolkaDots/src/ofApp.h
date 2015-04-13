@@ -32,22 +32,22 @@ public:
     float MyOutlineWidth = 4;
     
     void drawPinkPolkaCircle(float xPos, float yPos, float scale);
+    void drawaPolkaDotO(float xPos, float yPos, float scale);
     void drawanM(float xPos, float yPos, float scale);
     void drawaU(float xPos, float yPos, float scale);
     void drawHI(float xPos, float yPos, float scale);
-     void drawanH(float xPos, float yPos, float scale);
+    void drawanH(float xPos, float yPos, float scale);
 
-    
-    
-    
-    ofTrueTypeFont 	NTSAkkhara;
+    ofColor col;
+    ofColor color;
+    void ofColor_::getHsb(float &hue, float &saturation, float &brightness);
     
     char eventString[255];  // when do i use these floats?
+    char eventStringB[255];  // when do i use these floats?
     char timeString[255];   // whats a char?
     
     unsigned long last;
     int counter;
-    ofColor col;
     int Myradius;
     int Mousereact;
     
@@ -56,11 +56,8 @@ public:
     ofImage imggrad;
     ofImage FU;
     ofImage img;
+    ofTrueTypeFont 	NTSAkkhara;
  
-    
-
-    
-    
     ofPtr<ofCairoRenderer> cairo;
     ofPtr<ofBaseRenderer> opengl;
     ofTexture tex;
@@ -75,8 +72,8 @@ public:
     ofColor Salmon = ofColor :: salmon;
     ofColor Gold = ofColor :: gold;
     ofColor yellow;
-//    ofColor Yellow = ofColor::fromHex(0xF9FF4B);
-//    ofColor Yellow = ofSetHexColor(0xff0000);
+    
+
 };
 
 #endif
