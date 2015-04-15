@@ -90,9 +90,10 @@ void ofApp::draw(){
     }
 
     
-    
+    video.getTextureReference().bind();
 //    video.bind();
     tempMesh.draw();
+    video.getTextureReference().unbind();
 //    video.unbind();
     
     
