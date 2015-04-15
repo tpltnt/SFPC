@@ -14,9 +14,10 @@ void ofApp::setup(){
     theyareblue.loadImage("theyareblue.png");
     theyaretan.loadImage("theyaretan.png");
     salmon.setHsb(0,140,224);
-    tan.setHsb(30,58,234);
+    tan.setHsb(30,58,234); // (x/360*255, x/100*255, x/100*255)
+    brown.setHsb(30,96,63);
     sprintf(RuleEightCreate, "CREATE");
-    IntroBlack.loadFont("Intro Black.otf", 182); //font size
+    IntroBlack.loadFont("Intro Black.otf", 187); //font size
     
     
 
@@ -49,13 +50,16 @@ void ofApp::draw(){
 //------------------- start drawing ------------------------------------
 //    drawAnalyze(0,0,1);
     ofSetColor(salmon);
-    IntroBlack.drawString(RuleEightCreate, 182,472);
+    IntroBlack.drawString(RuleEightCreate, 205,485);
+    ofSetColor(brown);
+    atthesametimebrown.draw(490,729-50,543,79);
+    DontTrybrown.draw(505,27+50,435,116);
     ofSetColor(0);
-    atthesametimebrown.draw(490,729,543,79);
-    DontTrybrown.draw(505,27,435,116);
     theyaretan.draw(0,245,100,317);
     ofSetColor(tan);
-    ofRect(0,0,105,ofGetHeight());
+    float shake = ofNoise(200, 0);
+    ofRect(0,0,105+shake,ofGetHeight());
+    
     theyareblue.draw(0,245,100,317);
     
  //---------this is the mesh to reveal the analyze artwork------------

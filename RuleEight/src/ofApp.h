@@ -31,6 +31,7 @@ class ofApp : public ofBaseApp{
     
     ofColor salmon;
     ofColor tan;
+    ofColor brown;
     
     float RuleEightLeftVertex;
     float RuleEightRightVertex;
