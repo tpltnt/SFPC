@@ -8,24 +8,24 @@ void ofApp::drawAnalyze(float xPos, float yPos, float scale){
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    
-    salmon.setHsb(0,140,224);
-    tan.setHsb(30,58,234);
     atthesametimebrown.loadImage("atthesametimebrown.png");
     DontTrybrown.loadImage("DontTrybrown.png");
     RuleEightAnalyze.loadImage("RuleEightAnalyze.png");
     theyareblue.loadImage("theyareblue.png");
     theyaretan.loadImage("theyaretan.png");
+    salmon.setHsb(0,140,224);
+    tan.setHsb(30,58,234);
     sprintf(RuleEightCreate, "CREATE");
     IntroBlack.loadFont("Intro Black.otf", 182); //font size
+    
+    
 
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    RuleEightAnalyze.draw(0,0,ofGetWidth(),ofGetHeight());
-
+    RuleEightAnalyze.update();
    
 
 }
@@ -47,11 +47,12 @@ void ofApp::draw(){
     }
     
 //------------------- start drawing ------------------------------------
+//    drawAnalyze(0,0,1);
     ofSetColor(salmon);
-    drawAnalyze(0,0,1);
     IntroBlack.drawString(RuleEightCreate, 182,472);
-    atthesametimebrown.draw(493,732,543,79);
-    DontTrybrown.draw(520,30,435,116);
+    ofSetColor(0);
+    atthesametimebrown.draw(490,729,543,79);
+    DontTrybrown.draw(505,27,435,116);
     theyaretan.draw(0,245,100,317);
     ofSetColor(tan);
     ofRect(0,0,105,ofGetHeight());
@@ -62,25 +63,35 @@ void ofApp::draw(){
     RuleEightLeftVertex = mouseY-100;
     RuleEightRightVertex = mouseY;
     ofMesh tempMesh;
+    
+   
+    
     tempMesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
     
-    tempMesh.addVertex( ofPoint(0,RuleEightLeftVertex));
-    tempMesh.addColor(0);
+    tempMesh.addVertex( ofPoint(0, RuleEightLeftVertex ));
+    tempMesh.addTexCoord(ofVec2f(0, RuleEightLeftVertex));
+    tempMesh.addColor(255);
     
     tempMesh.addVertex( ofPoint(ofGetWidth(),RuleEightRightVertex));
-    tempMesh.addColor(0);
+    tempMesh.addTexCoord(ofVec2f(ofGetWidth(), RuleEightRightVertex));
+    tempMesh.addColor(255);
     
     tempMesh.addVertex( ofPoint(0,ofGetHeight()));
-    tempMesh.addColor(0);
+    tempMesh.addTexCoord(ofVec2f(0, ofGetHeight()));
+
+    tempMesh.addColor(255);
     
     tempMesh.addVertex( ofPoint(ofGetWidth(),ofGetHeight()));
-    tempMesh.addColor(0);
+    tempMesh.addTexCoord(ofVec2f(ofGetWidth(), ofGetHeight()));
+
+    tempMesh.addColor(255);
     
     RuleEightAnalyze.bind();
+    ofSetColor(255);
     tempMesh.draw();
     RuleEightAnalyze.unbind();
  
-
+    
 
 }
 
