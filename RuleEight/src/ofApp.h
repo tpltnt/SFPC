@@ -19,6 +19,7 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+    void drawAnalyze(float xPos, float yPos, float scale);
     
     ofImage atthesametimebrown;
     ofImage DontTrybrown;
@@ -30,6 +31,9 @@ class ofApp : public ofBaseApp{
     
     ofColor salmon;
     ofColor tan;
+    
+    float RuleEightLeftVertex;
+    float RuleEightRightVertex;
     
 
     

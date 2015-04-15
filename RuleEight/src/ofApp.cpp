@@ -1,31 +1,40 @@
 #include "ofApp.h"
 
+void ofApp::drawAnalyze(float xPos, float yPos, float scale){
+    
+    RuleEightAnalyze.draw(0,0,ofGetWidth(),ofGetHeight());
+    
+}
+
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    salmon.setHsb(0,5,88);
-    tan.setHsb(43,79,192);
+    salmon.setHsb(0,140,224);
+    tan.setHsb(30,58,234);
     atthesametimebrown.loadImage("atthesametimebrown.png");
     DontTrybrown.loadImage("DontTrybrown.png");
     RuleEightAnalyze.loadImage("RuleEightAnalyze.png");
     theyareblue.loadImage("theyareblue.png");
     theyaretan.loadImage("theyaretan.png");
     sprintf(RuleEightCreate, "CREATE");
-    IntroBlack.loadFont("Intro Black.otf", 82); //font size
+    IntroBlack.loadFont("Intro Black.otf", 182); //font size
 
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    ofBackground(255);
+    RuleEightAnalyze.draw(0,0,ofGetWidth(),ofGetHeight());
+
+   
 
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-//BG
-   
+
+//BG------white paper with light blue gridded lines--------------------
+   ofBackground(255);
     ofSetColor( ofColor::lightBlue);
     ofSetLineWidth(1);
     for (int i = 0; i < ofGetWidth(); i = i + 20){
@@ -37,18 +46,40 @@ void ofApp::draw(){
         ofLine(0, i, ofGetWidth(), i);
     }
     
-//    RuleEightAnalyze.draw(0,0,ofGetWidth(),ofGetHeight());
+//------------------- start drawing ------------------------------------
     ofSetColor(salmon);
-    
-    IntroBlack.drawString(RuleEightCreate, 182,272);
-//
-//    atthesametimebrown.draw(493,732,543,79);
-//    DontTrybrown.draw(520,30,435,116);
-//    theyaretan.draw(0,245,100,317);
+    drawAnalyze(0,0,1);
+    IntroBlack.drawString(RuleEightCreate, 182,472);
+    atthesametimebrown.draw(493,732,543,79);
+    DontTrybrown.draw(520,30,435,116);
+    theyaretan.draw(0,245,100,317);
     ofSetColor(tan);
     ofRect(0,0,105,ofGetHeight());
-    ofSetColor(salmon);
     theyareblue.draw(0,245,100,317);
+    
+ //---------this is the mesh to reveal the analyze artwork------------
+
+    RuleEightLeftVertex = mouseY-100;
+    RuleEightRightVertex = mouseY;
+    ofMesh tempMesh;
+    tempMesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+    
+    tempMesh.addVertex( ofPoint(0,RuleEightLeftVertex));
+    tempMesh.addColor(0);
+    
+    tempMesh.addVertex( ofPoint(ofGetWidth(),RuleEightRightVertex));
+    tempMesh.addColor(0);
+    
+    tempMesh.addVertex( ofPoint(0,ofGetHeight()));
+    tempMesh.addColor(0);
+    
+    tempMesh.addVertex( ofPoint(ofGetWidth(),ofGetHeight()));
+    tempMesh.addColor(0);
+    
+    RuleEightAnalyze.bind();
+    tempMesh.draw();
+    RuleEightAnalyze.unbind();
+ 
 
 
 }
