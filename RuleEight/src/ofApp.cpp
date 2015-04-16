@@ -64,20 +64,34 @@ void ofApp::draw(){
     
  //---------this is the mesh to reveal the analyze artwork------------
 
-    RuleEightLeftVertex = mouseY-100;
-    RuleEightRightVertex = mouseY;
+    cout <<  fabs(ofGetWidth()/2 - mouseX)  << endl;
+    
+    fromcenterdistance = (fabs(ofGetWidth()/2 - mouseX))/2;
+
+    
+    if (mouseX<ofGetWidth()/2){
+        leftYTarget = mouseY + fromcenterdistance;
+        rightYTarget = mouseY - fromcenterdistance;
+    }
+    if (mouseX>ofGetWidth()/2){
+        rightYTarget = mouseY + fromcenterdistance;
+        leftYTarget = mouseY - fromcenterdistance;
+
+    }
+    
+    RuleEightLeftVertex = 0.95 * RuleEightLeftVertex + 0.05 * (mouseY-100);
+    RuleEightRightVertex = 0.95 * RuleEightLeftVertex + 0.05 * (mouseY);
+    
+    
     ofMesh tempMesh;
-    
-   
-    
     tempMesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
     
-    tempMesh.addVertex( ofPoint(0, RuleEightLeftVertex ));
-    tempMesh.addTexCoord(ofVec2f(0, RuleEightLeftVertex));
+    tempMesh.addVertex( ofPoint(0, RuleEightLeftVertex+leftYTarget));
+    tempMesh.addTexCoord(ofVec2f(0, RuleEightLeftVertex+leftYTarget));
     tempMesh.addColor(255);
     
-    tempMesh.addVertex( ofPoint(ofGetWidth(),RuleEightRightVertex));
-    tempMesh.addTexCoord(ofVec2f(ofGetWidth(), RuleEightRightVertex));
+    tempMesh.addVertex( ofPoint(ofGetWidth(),RuleEightRightVertex+rightYTarget));
+    tempMesh.addTexCoord(ofVec2f(ofGetWidth(),RuleEightRightVertex+rightYTarget));
     tempMesh.addColor(255);
     
     tempMesh.addVertex( ofPoint(0,ofGetHeight()));

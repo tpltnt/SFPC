@@ -33,9 +33,7 @@ class ofApp : public ofBaseApp{
     ofColor tan;
     ofColor brown;
     
-    float RuleEightLeftVertex;
-    float RuleEightRightVertex;
-    
+    float RuleEightLeftVertex, RuleEightRightVertex, fromcenterdistance, leftYTarget, rightYTarget;
 
     
 		

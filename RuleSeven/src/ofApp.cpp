@@ -9,6 +9,7 @@ void ofApp::setup(){
     brown.setHsb(30,96,63);
     yellow.setHsb(34,150,234);
     green.setHsb(49,127,219);
+    royal.setHsb(157,127,181);
     sprintf(ThereisOnly, "THERE IS ONLY WORK");
     IntroBlack.loadFont("Intro Black.otf", 20); //font size
     
@@ -28,6 +29,10 @@ void ofApp::setup(){
     arrow.loadImage("arrow.png");
     RuleSevenBG.loadImage("RuleSevenBG.png");
     ifyouwork.loadImage("ifyouwork.png");
+    
+    videothree.loadMovie("RuleSevenVideoThree.mov");
+    videothree.setLoopState(OF_LOOP_NORMAL);
+    videothree.play();
 
 
 
@@ -39,6 +44,7 @@ void ofApp::update(){
     scribbles.update();
     videoone.update();
     videotwo.update();
+    videothree.update();
 
 }
 
@@ -47,11 +53,14 @@ void ofApp::draw(){
     float iywmove = 10*ofGetElapsedTimef();
     ofSetColor(green);
     ofRect(30,110,350,200);
+    ofSetColor(royal);
+    ofRect(370,340,350,200);
     ofSetColor(brown);
     ifyouwork.draw(iywmove,150,627/2,177/2);
     ofSetColor(255);
     videoone.draw(370,110,350,200);
     videotwo.draw(990,110,350,200);
+    videothree.draw(680,340,350,200);
     ofSetColor(salmon);
     ofRect(690,110,340,200);
     

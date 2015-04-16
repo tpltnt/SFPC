@@ -56,8 +56,7 @@ class ofApp : public ofBaseApp{
     
     
     ofVideoPlayer scribbles;
-    ofVideoPlayer videoone;
-    ofVideoPlayer videotwo;
+    ofVideoPlayer videoone, videotwo, videothree;
     
     ofTrueTypeFont 	IntroBlack;
     char ThereisOnly[255];
@@ -66,6 +65,7 @@ class ofApp : public ofBaseApp{
     ofColor yellow;
     ofColor brown;
     ofColor green;
+    ofColor royal;
     
     ofImage arrow;
     ofImage RuleSevenBG;
