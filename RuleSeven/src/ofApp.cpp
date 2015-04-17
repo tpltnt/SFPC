@@ -1,7 +1,6 @@
 #include "ofApp.h"
 #include "ofMain.h"
 
-
 //--------------------------------------------------------------
 void ofApp::setup(){
     salmon.setHsb(0,140,224);
@@ -10,6 +9,8 @@ void ofApp::setup(){
     yellow.setHsb(34,150,234);
     green.setHsb(49,127,219);
     royal.setHsb(157,127,181);
+    blue.setHsb(133,138,214);
+    pink.setHsb(4,43,237);
     sprintf(ThereisOnly, "THERE IS ONLY WORK");
     IntroBlack.loadFont("Intro Black.otf", 20); //font size
     
@@ -26,13 +27,16 @@ void ofApp::setup(){
     videotwo.setLoopState(OF_LOOP_NORMAL);
     videotwo.play();
     
-    arrow.loadImage("arrow.png");
-    RuleSevenBG.loadImage("RuleSevenBG.png");
-    ifyouwork.loadImage("ifyouwork.png");
     
     videothree.loadMovie("RuleSevenVideoThree.mov");
     videothree.setLoopState(OF_LOOP_NORMAL);
     videothree.play();
+    
+    allofthetime.loadImage("allofthetime.png");
+    arrow.loadImage("arrow.png");
+    RuleSevenBG.loadImage("RuleSevenBG.png");
+    ifyouwork.loadImage("ifyouwork.png");
+    itspeople.loadImage("itspeople.png");
 
 
 
@@ -53,16 +57,24 @@ void ofApp::draw(){
     float iywmove = 10*ofGetElapsedTimef();
     ofSetColor(green);
     ofRect(30,110,350,200);
+    ofSetColor(green);
+    ofRect(990,340,350,200);
     ofSetColor(royal);
     ofRect(370,340,350,200);
     ofSetColor(brown);
     ifyouwork.draw(iywmove,150,627/2,177/2);
+    allofthetime.draw(40,660,383/2,231/2);
+    itspeople.draw(1020,340,530/2,392/2);
     ofSetColor(255);
     videoone.draw(370,110,350,200);
     videotwo.draw(990,110,350,200);
     videothree.draw(680,340,350,200);
     ofSetColor(salmon);
     ofRect(690,110,340,200);
+    ofSetColor(blue);
+    ofRect(690,560,340,200);
+    ofSetColor(pink);
+    ofRect(30,560,340,200);
     
     ofSetColor(255);
     RuleSevenBG.draw(0,0,ofGetWidth(),ofGetHeight());
@@ -148,10 +160,13 @@ void ofApp::draw(){
         strokes[i].draw(videoone.getPosition());
     }
     
-    ofDrawBitmapStringHighlight("press spacebar to clear", ofPoint(videoone.getWidth() + 50, 50), ofColor::magenta, ofColor::white);
-    ofDrawBitmapStringHighlight("press + to increase video speed", ofPoint(videoone.getWidth() + 50, 110), ofColor::magenta, ofColor::white);
-    ofDrawBitmapStringHighlight("press - to increase video speed", ofPoint(videoone.getWidth() + 50, 140), ofColor::magenta, ofColor::white);
-    ofDrawBitmapStringHighlight("video speed: " + ofToString(videoone.getSpeed(), 3), ofPoint(videoone.getWidth() + 50, 170), ofColor::magenta, ofColor::white);
+    ofPushMatrix();
+    ofTranslate(0, 70);
+//    ofDrawBitmapStringHighlight("press spacebar to clear", ofPoint(videoone.getWidth() + 250, 50), ofColor::magenta, ofColor::white);
+    ofDrawBitmapStringHighlight("press + to increase video speed", ofPoint(videoone.getWidth() + 200, ofGetHeight()-160), ofColor::magenta, ofColor::white);
+    ofDrawBitmapStringHighlight("press - to increase video speed", ofPoint(videoone.getWidth() + 200, ofGetHeight()-130), ofColor::magenta, ofColor::white);
+    ofDrawBitmapStringHighlight("video speed: " + ofToString(videoone.getSpeed(), 3), ofPoint(videoone.getWidth() + 250, ofGetHeight()-100), ofColor::magenta, ofColor::white);
+    ofPopMatrix();
 
 
 

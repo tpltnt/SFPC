@@ -66,10 +66,15 @@ class ofApp : public ofBaseApp{
     ofColor brown;
     ofColor green;
     ofColor royal;
+    ofColor blue;
+    ofColor pink;
     
     ofImage arrow;
     ofImage RuleSevenBG;
     ofImage ifyouwork;
+    ofImage allofthetime;
+    ofImage itspeople;
+    
 
     
     timeStroke TS;
