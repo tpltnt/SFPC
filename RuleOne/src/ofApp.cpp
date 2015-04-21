@@ -45,27 +45,46 @@ void ofApp::draw(){
     for (int i = 0; i < ofGetHeight(); i = i + 20){
         ofLine(0, i, ofGetWidth(), i);
     }
+    
+//----------draw ellipses------------------------------
+    
+    float sinOfTime				= sin( ofGetElapsedTimef() );
+    float sinOfTimeMapped		= ofMap( sinOfTime, -1, 1, 0, 255);
+    
+    float sinOfTime2			= sin( ofGetElapsedTimef() + PI);
+    float sinOfTimeMapped2		= ofMap( sinOfTime2, -1, 1, 0, 255);
+    
+
+    sin(ofGetElapsedTimef()); // moves from -1 and 1 every 2Pi seconds
+    float sinValue = sin(ofGetElapsedTimef()*2);
+    ofColor c;
+    c.set(ofColor::pink);
+    c.lerp( ofColor::blue,  ofMap(mouseX, 0, ofGetWidth(), 0, 1, true));
+    ofSetColor(c);
+    ofCircle(610,490+sinValue*17, 5);
+    ofCircle(640,490+sinValue*15, 5);
+    ofCircle(670,490+sinValue*20, 5);
 
 //----------draw letters-----------------
     
     letterheight = 380;
-    ofMap(intalpha, 0, 0, ofGetWidth()-100, 50);
-    intalpha = mouseX;
-    ofSetColor(224,103,99,intalpha);
+    float intalphaMapped = ofMap(mouseX, 30, ofGetWidth()-400, 0, 255);
+  
+    ofSetColor(224,103,99,intalphaMapped);
     IntroBlack.drawString(letterT, 235,letterheight);
-    ofSetColor(245,155,181,intalpha);
+    ofSetColor(245,155,181,intalphaMapped);
     IntroBlack.drawString(letterR, 405,letterheight);
-    ofSetColor(200,221,109,intalpha);
+    ofSetColor(200,221,109,intalphaMapped);
     IntroBlack.drawString(letterU, 605,letterheight);
-    ofSetColor(98,196,215,intalpha);
+    ofSetColor(98,196,215,intalphaMapped);
     IntroBlack.drawString(letterS, 805, letterheight);
-    ofSetColor(245,155,181,intalpha);
+    ofSetColor(245,155,181,intalphaMapped);
     IntroBlack.drawString(letterT2, 1005,letterheight);
     
     
     ofSetColor(brown);
     RuleOneeverything.draw(50,50,1328,754);
-    Zach.draw(mouseX,430,484,430);
+    Zach.draw(mouseX,434,484,430);
 
 }
 
