@@ -21,18 +21,26 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
         void gotMessage(ofMessage msg);
     
-        Student myStudentA;
-        Student myStudentB;
-        Student myStudentC;
-        Student myStudentD;
-        Student myStudentE;
-        Student myStudentF;
     
+    //----------for lerping from pt A to pt B--------------------
     ofPoint aStart;
     ofPoint bEnd;
     
     float pct;
     
+    //---------------for drawing a line into a shader------------
+    ofFbo       lineFbo;
+    ofImage     rockImage;
+    ofPolyline  line;
+    ofShader    shader;
+    
+    
+    Student myStudentA;
+    Student myStudentB;
+    Student myStudentC;
+    Student myStudentD;
+    Student myStudentE;
+    Student myStudentF;
     Student myStudent[NSTUDENTS];
     
     ofTrueTypeFont 	IntroBlack;
@@ -45,9 +53,7 @@ class ofApp : public ofBaseApp{
     ofColor royal;
     ofColor blue;
     ofColor pink;
-    
     ofImage studentA, studentB, studentC;
-
     ofImage BGtemp;
 		
 };

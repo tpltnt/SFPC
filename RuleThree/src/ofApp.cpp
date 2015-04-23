@@ -10,7 +10,7 @@ void ofApp::setup(){
     
     pct = 0;
 
-    //-------style sheets--------------------
+    //----------------------style sheets--------------------
     salmon.setHsb(0,140,224);
     tan.setHsb(30,58,234); // (x/360*255, x/100*255, x/100*255)
     brown.setHsb(30,96,63);
@@ -26,7 +26,7 @@ void ofApp::setup(){
     studentC.loadImage("studentC.png");
     BGtemp.loadImage("BGtemp.png");
     
-    //-------------load class--------------------------
+    //---------------------load class of Students--------------------------
         for(int i=0; i<NSTUDENTS; i++){
         
         int size = (i+1) * 10; // defining the size of each ball based on its place in the array
@@ -66,6 +66,25 @@ void ofApp::update(){
 void ofApp::draw(){
     ofSetColor(255);
     BGtemp.draw(0,0,ofGetWidth(),ofGetHeight());
+    
+    
+    lineFbo.begin();
+    ofClear(255,255,255,255);
+    ofSetColor(0);
+    line.draw();
+    lineFbo.end();
+    
+    
+    shader.begin();
+    
+    shader.setUniformTexture("tex0",lineFbo, 0 );
+    shader.setUniformTexture("tex1",rockImage.getTextureReference(), 1 );
+    
+    ofSetColor(255);
+    
+    lineFbo.draw(0,0);
+    shader.end();
+
 
 
     //-------------ball lerp----------------------
@@ -83,6 +102,10 @@ void ofApp::draw(){
         
         myStudent[i].draw(randomX, randomY, 1);
     }
+    
+//    ofBackground(255);
+    
+
 
 }
 
@@ -103,6 +126,7 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
+     line.addVertex(ofPoint(x,y));
 
 }
 

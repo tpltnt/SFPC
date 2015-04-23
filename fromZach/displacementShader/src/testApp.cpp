@@ -7,6 +7,12 @@ void testApp::setup(){
     lineFbo.allocate(1024, 768, GL_RGBA, 4);
     rockImage.loadImage("stone_rocky_surface_texture.jpg");
     shader.load("shader/shader");
+    
+    
+    //-------------ball------------
+    aStart.set(0,0);
+    bEnd.set(ofGetWidth()/2, ofGetHeight()/2);
+    pct = 0;
 }
 
 //--------------------------------------------------------------
@@ -14,6 +20,14 @@ void testApp::update(){
 
     
     if (ofGetFrameNum() % 30 == 0) shader.load("shader/shader");;
+    
+    
+    //-----------ball------------------
+    pct += 0.005;   // ie: pct = pct + 0.005
+    
+    if (pct > 1){
+        pct = 0;
+    }
     
 }
 
@@ -27,7 +41,13 @@ void testApp::draw(){
     ofClear(255,255,255,255);
     ofSetColor(0);
     line.draw();
-        ofRect(100,100,300,400);
+    
+    //-------------ball---------------------
+    float pctShaped =  powf(pct, 0.5);     //pct * pct;      ///powf(pct, 2);
+    ofPoint mixPt = (1.0-pctShaped) * aStart + pctShaped * bEnd;
+    ofSetColor(ofColor::fuchsia);
+    ofCircle(mixPt, 100);
+    
     lineFbo.end();
     
     
