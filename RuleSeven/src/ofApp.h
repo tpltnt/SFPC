@@ -56,7 +56,7 @@ class ofApp : public ofBaseApp{
     
     
     ofVideoPlayer scribbles;
-    ofVideoPlayer videoone, videotwo, videothree;
+    ofVideoPlayer videoone, videotwo, videothree, videofour;
     
     ofTrueTypeFont 	IntroBlack;
     char ThereisOnly[255];
@@ -76,6 +76,7 @@ class ofApp : public ofBaseApp{
     ofImage itspeople;
     
 
+ 
     
     timeStroke TS;
     vector < timeStroke > strokes;

@@ -2,7 +2,6 @@
 
 #include "ofMain.h"
 
-
 class ofApp : public ofBaseApp{
 
 	public:
@@ -19,22 +18,5 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    void drawAnalyze(float xPos, float yPos, float scale);
-    
-    ofImage atthesametimebrown;
-    ofImage DontTrybrown;
-    ofImage RuleEightAnalyze;
-    ofImage theyareblue;
-    ofImage theyaretan;
-    ofTrueTypeFont 	IntroBlack;
-    char RuleEightCreate[255];
-    
-    ofColor salmon;
-    ofColor tan;
-    ofColor brown;
-    
-    float RuleEightLeftVertex, RuleEightRightVertex, fromcenterdistance, leftYTarget, rightYTarget;
-
-    
 		
 };

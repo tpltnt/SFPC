@@ -32,11 +32,17 @@ void ofApp::setup(){
     videothree.setLoopState(OF_LOOP_NORMAL);
     videothree.play();
     
+    videofour.loadMovie("RuleSevenVideoFour.mov");
+    videofour.setLoopState(OF_LOOP_NORMAL);
+    videofour.play();
+    
     allofthetime.loadImage("allofthetime.png");
     arrow.loadImage("arrow.png");
     RuleSevenBG.loadImage("RuleSevenBG.png");
     ifyouwork.loadImage("ifyouwork.png");
     itspeople.loadImage("itspeople.png");
+    
+ 
 
 
 
@@ -49,6 +55,9 @@ void ofApp::update(){
     videoone.update();
     videotwo.update();
     videothree.update();
+    videofour.update();
+    
+
 
 }
 
@@ -69,6 +78,7 @@ void ofApp::draw(){
     videoone.draw(370,110,350,200);
     videotwo.draw(990,110,350,200);
     videothree.draw(680,340,350,200);
+    videofour.draw(40,340,330,200);
     ofSetColor(salmon);
     ofRect(690,110,340,200);
     ofSetColor(blue);
@@ -167,6 +177,8 @@ void ofApp::draw(){
     ofDrawBitmapStringHighlight("press - to increase video speed", ofPoint(videoone.getWidth() + 200, ofGetHeight()-130), ofColor::magenta, ofColor::white);
     ofDrawBitmapStringHighlight("video speed: " + ofToString(videoone.getSpeed(), 3), ofPoint(videoone.getWidth() + 250, ofGetHeight()-100), ofColor::magenta, ofColor::white);
     ofPopMatrix();
+    
+   
 
 
 
