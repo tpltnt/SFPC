@@ -6,8 +6,10 @@ void ofApp::setup(){
     //---------------------------lerp ball------------------
     
     aStart.set(0,0);
-    bEnd.set(ofGetWidth()/2, ofGetHeight()/2);
-    
+    bStart.set(ofGetWidth(),0);
+    aEnd.set(400, 300);
+    bEnd.set(900, 300);
+
     pct = 0;
 
     //----------------------style sheets--------------------
@@ -71,8 +73,7 @@ void ofApp::draw(){
     for (int i = 0; i < ofGetHeight(); i = i + 20){
         ofLine(0, i, ofGetWidth(), i);
     }
-    ofSetColor(255);
-    TaeyoonTeaching.draw(438,242,442,612);
+ 
     
     
     lineFbo.begin();
@@ -96,14 +97,37 @@ void ofApp::draw(){
 
 
     //-------------ball lerp----------------------
-//    if (mouseDragged = true){
-    float pctShaped =  powf(pct, 0.5);     //pct * pct;      ///powf(pct, 2);
-    ofPoint mixPt = (1.0-pctShaped) * aStart + pctShaped * bEnd;
-    ofSetColor(ofColor::fuchsia);
-    ofCircle(mixPt, 10);
+//    for (int i=0; i<50; i ++) {
+//        ofSetColor(ofColor::fuchsia);
+//        aStart.set(0,0);
+//        bEnd.set(ofGetWidth()/2, ofGetHeight()/2);
+//        pct = 0;
+//        float pctShaped =  powf(pct, 0.5);
+//        ofPoint mixPt = (1.0-pctShaped) * aStart + pctShaped * bEnd;
+//        ofSetColor(ofColor::fuchsia);
+//        ofCircle(mixPt*i, 10);
+//        
+//    }
+
+
+        ofSetColor(ofColor::fuchsia);
+//        aStart.set(0,0);
+//        bEnd.set(ofGetWidth()/2, ofGetHeight()/2);
+//        pct = 0;
+        float pctShaped =  powf(pct, 0.5);
+        ofPoint mixPt = (1.0-pctShaped) * aStart + pctShaped * aEnd;
+    ofPoint mixPtB = (1.0-pctShaped) * bStart + pctShaped * bEnd;
+
+        ofSetColor(ofColor::fuchsia);
+        ofCircle(mixPt, 20);
+        ofCircle(mixPtB, 20);
+
+  
+   
 //    }
     
     //--------call student class-------------------
+    ofSetColor(255);
     for(int i=0; i<NSTUDENTS; i++){
         
         int size = (i+1) * 10; // defining the size of each ball based on its place in the array
@@ -113,8 +137,9 @@ void ofApp::draw(){
         myStudent[i].draw(randomX, randomY, 1);
     }
     
-//    ofBackground(255);
-    
+
+    ofSetColor(255);
+    TaeyoonTeaching.draw(438,242,442,612);
 
 
 }
@@ -137,14 +162,13 @@ void ofApp::mouseMoved(int x, int y ){
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
      line.addVertex(ofPoint(x,y));
-        pct += 0.002;
+        pct += 0.004;
     
     if (pct > 1){
         pct = 0;
     }
- 
-
 }
+
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){

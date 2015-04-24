@@ -84,6 +84,18 @@ void ofApp::draw(){
     
     ofSetColor(brown);
     RuleOneeverything.draw(50,50,1328,754);
+    
+//    float moveZach = 100;
+//    Zach.draw(moveZach,434,484,430);
+//    if (ofGetMousePressed()){
+//        
+//        Zach.draw(mouseX,434,484,430);
+//    };
+////    if else (){
+////        Zach.draw(500,434,484,430);
+////        
+////    }
+    
     Zach.draw(mouseX,434,484,430);
 
 }

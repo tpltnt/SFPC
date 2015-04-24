@@ -35,7 +35,7 @@ class Student{
     
     ofColor color; // id like to set this to RGB,
     
-    ofImage studentA, studentB, studentC;
+    ofImage studentA, studentB, studentC, img;
 
 
     Student(); // constructor - used to initialize an object, if no properties are passed the program sets them to the default value

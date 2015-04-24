@@ -23,9 +23,8 @@ class ofApp : public ofBaseApp{
     
     
     //----------for lerping from pt A to pt B--------------------
-    ofPoint aStart;
-    ofPoint bEnd;
-    
+    ofPoint aStart, bStart;
+    ofPoint bEnd, aEnd;
     float pct;
     
     //---------------for drawing a line into a shader------------

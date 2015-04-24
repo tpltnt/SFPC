@@ -25,6 +25,15 @@ void Student::setup(float _x, float _y, int _dim){
         studentA.loadImage("studentA.png");
         studentB.loadImage("studentB.png");
         studentC.loadImage("studentC.png");
+    
+    float randomVal = ofRandom(0,1);
+    if (randomVal < 0.33){
+        img.loadImage("studentA.png");
+    } else if (randomVal >= 0.33 && randomVal < 0.66){
+        img.loadImage("studentB.png");
+    } else {
+        img.loadImage("studentC.png");
+    }
 
         
 }
@@ -59,14 +68,11 @@ void Student::draw(float _x, float _y, int _dim){
     
     ofSetColor(color);
     
+img.draw(x,y,80,180);
 
-    ofRotate(rotation);
-    studentA.draw(x,y,80,180);
-    studentB.draw(x,y,80,180);
-    studentC.draw(x,y,80,180);
     
     ofPopMatrix();
-    ofPopMatrix();
+    ofPopStyle();
 
 }
 
