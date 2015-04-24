@@ -11,8 +11,11 @@ void ofApp::setup(){
     royal.setHsb(157,127,181);
     blue.setHsb(133,138,214);
     pink.setHsb(4,43,237);
-    sprintf(ThereisOnly, "THERE IS ONLY WORK");
+    sprintf(WORK, "WORK");
+    IntroBlackLrg.loadFont("Intro Black.otf", 40); //font size
+    sprintf(ThereisOnly, "THE ONLY RULE IS");
     IntroBlack.loadFont("Intro Black.otf", 20); //font size
+  
     
     scribbles.loadMovie("ScribblesonWhite.mov");
     scribbles.setLoopState(OF_LOOP_NORMAL);
@@ -41,6 +44,8 @@ void ofApp::setup(){
     RuleSevenBG.loadImage("RuleSevenBG.png");
     ifyouwork.loadImage("ifyouwork.png");
     itspeople.loadImage("itspeople.png");
+    tosomething.loadImage("toSomething.png");
+    whoeventually.loadImage("whoeventually.png");
     
  
 
@@ -68,23 +73,26 @@ void ofApp::draw(){
     ofRect(30,110,350,200);
     ofSetColor(green);
     ofRect(990,340,350,200);
+    ofSetColor(blue);
+    ofRect(690,560,340,200);
     ofSetColor(royal);
     ofRect(370,340,350,200);
+    ofSetColor(salmon);
+    ofRect(690,110,340,200);
+    ofSetColor(pink);
+    ofRect(30,560,340,200);
     ofSetColor(brown);
     ifyouwork.draw(iywmove,150,627/2,177/2);
-    allofthetime.draw(40,660,383/2,231/2);
-    itspeople.draw(1020,340,530/2,392/2);
+    allofthetime.draw(40,620,383/2,231/2);
+    itspeople.draw(1030,345,530/2.2,392/2.2);
+    tosomething.draw(410,365,368/2,270/2);
+
     ofSetColor(255);
-    videoone.draw(370,110,350,200);
+    videoone.draw(350,110,350,200);
     videotwo.draw(990,110,350,200);
     videothree.draw(680,340,350,200);
     videofour.draw(40,340,330,200);
-    ofSetColor(salmon);
-    ofRect(690,110,340,200);
-    ofSetColor(blue);
-    ofRect(690,560,340,200);
-    ofSetColor(pink);
-    ofRect(30,560,340,200);
+    
     
     ofSetColor(255);
     RuleSevenBG.draw(0,0,ofGetWidth(),ofGetHeight());
@@ -160,8 +168,11 @@ void ofApp::draw(){
     
     
     
-    IntroBlack.drawString(ThereisOnly, mouseX-100,mouseY+120); //type the words
+    IntroBlack.drawString(ThereisOnly, mouseX-100,mouseY+25); //type the words
 //    arrow.draw(mouseX, mouseY,50,60);
+   
+    IntroBlackLrg.drawString(WORK, mouseX-30,mouseY+70);
+   
     
     ofSetLineWidth(3);
     ofSetColor(255,0,0);
@@ -176,6 +187,7 @@ void ofApp::draw(){
     ofDrawBitmapStringHighlight("press + to increase video speed", ofPoint(videoone.getWidth() + 200, ofGetHeight()-160), ofColor::magenta, ofColor::white);
     ofDrawBitmapStringHighlight("press - to increase video speed", ofPoint(videoone.getWidth() + 200, ofGetHeight()-130), ofColor::magenta, ofColor::white);
     ofDrawBitmapStringHighlight("video speed: " + ofToString(videoone.getSpeed(), 3), ofPoint(videoone.getWidth() + 250, ofGetHeight()-100), ofColor::magenta, ofColor::white);
+    
     ofPopMatrix();
     
    
@@ -194,11 +206,19 @@ void ofApp::keyPressed(int key){
     
     
     if (key == '+'){
-        videoone.setSpeed(videoone.getSpeed()+0.05);
+        videoone.setSpeed(videoone.getSpeed()+0.1);
+        videotwo.setSpeed(videotwo.getSpeed()+0.1);
+        videothree.setSpeed(videothree.getSpeed()+0.1);
+        videofour.setSpeed(videofour.getSpeed()+0.1);
+        videofive.setSpeed(videofive.getSpeed()+0.1);
     }
     
     if (key == '-'){
-        videoone.setSpeed(videoone.getSpeed()-0.05);
+        videoone.setSpeed(videoone.getSpeed()-0.1);
+        videotwo.setSpeed(videotwo.getSpeed()-0.1);
+        videothree.setSpeed(videothree.getSpeed()-0.1);
+        videofour.setSpeed(videofour.getSpeed()-0.1);
+        videofive.setSpeed(videofive.getSpeed()-0.1);
     }
 
 }

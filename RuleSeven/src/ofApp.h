@@ -56,10 +56,12 @@ class ofApp : public ofBaseApp{
     
     
     ofVideoPlayer scribbles;
-    ofVideoPlayer videoone, videotwo, videothree, videofour;
+    ofVideoPlayer videoone, videotwo, videothree, videofour, videofive;
     
     ofTrueTypeFont 	IntroBlack;
+    ofTrueTypeFont 	IntroBlackLrg;
     char ThereisOnly[255];
+    char WORK [255];
     ofColor salmon;
     ofColor tan;
     ofColor yellow;
@@ -73,7 +75,7 @@ class ofApp : public ofBaseApp{
     ofImage RuleSevenBG;
     ofImage ifyouwork;
     ofImage allofthetime;
-    ofImage itspeople;
+    ofImage itspeople, tosomething, whoeventually;
     
 
  

@@ -55,5 +55,6 @@ class ofApp : public ofBaseApp{
     ofColor pink;
     ofImage studentA, studentB, studentC;
     ofImage BGtemp;
+    ofImage TaeyoonTeaching;
 		
 };

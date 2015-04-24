@@ -24,6 +24,7 @@ void ofApp::setup(){
     studentA.loadImage("studentA.png");
     studentB.loadImage("studentB.png");
     studentC.loadImage("studentC.png");
+    TaeyoonTeaching.loadImage("TaeyoonTeaching.png");
     BGtemp.loadImage("BGtemp.png");
     
     //---------------------load class of Students--------------------------
@@ -42,14 +43,6 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    
-    //--------lerp ball moving------------------
-    pct += 0.005;   // ie: pct = pct + 0.005
-    
-    if (pct > 1){
-        pct = 0;
-    }
-
     //--------call student class-------------------
 
     for(int i=0; i<NSTUDENTS; i++){
@@ -65,12 +58,27 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofSetColor(255);
-    BGtemp.draw(0,0,ofGetWidth(),ofGetHeight());
+    
+    //BG------white paper with light blue gridded lines--------------------
+    ofBackground(255);
+    ofSetColor( ofColor::lightBlue);
+    ofSetLineWidth(1);
+    for (int i = 0; i < ofGetWidth(); i = i + 20){
+        ofLine(i,0,i, ofGetHeight());
+        
+    }
+    
+    for (int i = 0; i < ofGetHeight(); i = i + 20){
+        ofLine(0, i, ofGetWidth(), i);
+    }
+    ofSetColor(255);
+    TaeyoonTeaching.draw(438,242,442,612);
     
     
     lineFbo.begin();
-    ofClear(255,255,255,255);
-    ofSetColor(0);
+//    ofClear(255,255,255,255);
+    ofSetColor(salmon);
+    ofSetLineWidth(8);
     line.draw();
     lineFbo.end();
     
@@ -88,10 +96,12 @@ void ofApp::draw(){
 
 
     //-------------ball lerp----------------------
+//    if (mouseDragged = true){
     float pctShaped =  powf(pct, 0.5);     //pct * pct;      ///powf(pct, 2);
     ofPoint mixPt = (1.0-pctShaped) * aStart + pctShaped * bEnd;
     ofSetColor(ofColor::fuchsia);
-    ofCircle(mixPt, 100);
+    ofCircle(mixPt, 10);
+//    }
     
     //--------call student class-------------------
     for(int i=0; i<NSTUDENTS; i++){
@@ -127,6 +137,12 @@ void ofApp::mouseMoved(int x, int y ){
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
      line.addVertex(ofPoint(x,y));
+        pct += 0.002;
+    
+    if (pct > 1){
+        pct = 0;
+    }
+ 
 
 }
 
