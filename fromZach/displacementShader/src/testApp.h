@@ -24,4 +24,10 @@ class testApp : public ofBaseApp{
         ofPolyline  line;
         ofShader    shader;
     
+
+    ofPoint aStart;
+    ofPoint bEnd;
+    
+    float pct;
+
 };
