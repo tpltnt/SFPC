@@ -5,7 +5,7 @@ void ofApp::setup(){
     
     //---------------------------lerp ball------------------
     
-    aStart.set(0,0);
+    aStart.set(0,0); //set the start and end point
     bStart.set(ofGetWidth(),0);
     aEnd.set(400, 300);
     bEnd.set(900, 300);
@@ -77,7 +77,6 @@ void ofApp::draw(){
     
     
     lineFbo.begin();
-//    ofClear(255,255,255,255);
     ofSetColor(salmon);
     ofSetLineWidth(8);
     line.draw();
@@ -94,8 +93,11 @@ void ofApp::draw(){
     lineFbo.draw(0,0);
     shader.end();
 
+   
+    
+    // in the student object, you'd need something like
 
-
+    
     //-------------ball lerp----------------------
 //    for (int i=0; i<50; i ++) {
 //        ofSetColor(ofColor::fuchsia);
@@ -111,12 +113,9 @@ void ofApp::draw(){
 
 
         ofSetColor(ofColor::fuchsia);
-//        aStart.set(0,0);
-//        bEnd.set(ofGetWidth()/2, ofGetHeight()/2);
-//        pct = 0;
         float pctShaped =  powf(pct, 0.5);
         ofPoint mixPt = (1.0-pctShaped) * aStart + pctShaped * aEnd;
-    ofPoint mixPtB = (1.0-pctShaped) * bStart + pctShaped * bEnd;
+        ofPoint mixPtB = (1.0-pctShaped) * bStart + pctShaped * bEnd;
 
         ofSetColor(ofColor::fuchsia);
         ofCircle(mixPt, 20);

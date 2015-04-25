@@ -1,10 +1,4 @@
-//
-//  Student.h
-//  RuleThree
-//
-//  Created by Eve Weinberg on 4/22/15.
-//
-//
+
 
 #ifndef __RuleThree__Student__
 #define __RuleThree__Student__
@@ -29,13 +23,17 @@ class Student{
     float rotation;
     float x;
     float y;
-    float speedY; // speed and direction
+    float u;
+    float v;
+    float speedY; // speed and direction, do I need this?
     float speedX;
     int dim;      // size
+    float startpt;
+    float endpt;
     
     ofColor color; // id like to set this to RGB,
     
-    ofImage studentA, studentB, studentC, img;
+    ofImage studentA, studentB, studentC, studentD, studentE, studentF, img;
 
 
     Student(); // constructor - used to initialize an object, if no properties are passed the program sets them to the default value

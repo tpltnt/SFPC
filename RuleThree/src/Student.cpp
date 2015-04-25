@@ -1,10 +1,3 @@
-//
-//  Student.cpp
-//  RuleThree
-//
-//  Created by Eve Weinberg on 4/22/15.
-//
-//
 
 #include "Student.h"
 
@@ -20,23 +13,35 @@ void Student::setup(float _x, float _y, int _dim){
         speedX = ofRandom(-1,1);
         speedY = ofRandom(-1,1);
         rotation = ofRandom(-10,10);
-        color.setHsb(ofRandom(255),ofRandom(90,130),ofRandom(200,230));
+        color.setHsb(ofRandom(255),ofRandom(100,110),ofRandom(200,220));
     
-        studentA.loadImage("studentA.png");
+        studentA.loadImage("studentA.png"); //load all 6 images
         studentB.loadImage("studentB.png");
         studentC.loadImage("studentC.png");
+        studentD.loadImage("studentD.png");
+        studentE.loadImage("studentE.png");
+        studentF.loadImage("studentF.png");
+   
     
-    float randomVal = ofRandom(0,1);
+    float randomVal = ofRandom(0,1); //randomly select A,B,or C
     if (randomVal < 0.33){
         img.loadImage("studentA.png");
     } else if (randomVal >= 0.33 && randomVal < 0.66){
         img.loadImage("studentB.png");
     } else {
         img.loadImage("studentC.png");
+        }
     }
 
-        
-}
+//for(int i=0; i<NSTUDENTS; i++){
+//    myStudent[i].moveTowards(mouseX, mouseY);   // or ofGetWidth()/2, ofGetHeight()/2
+//}
+//
+//void Student::moveTowards( float xTarget, float yTarget){
+//    u = 0.95 * x + 0.05 * xTarget;
+//    v = 0.95 * x + 0.05 * yTarget;
+//    
+//}
 
 
 void Student::update(float _x, float _y, int _dim){
