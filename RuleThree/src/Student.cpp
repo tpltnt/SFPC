@@ -6,11 +6,11 @@ Student::Student(){
 
 void Student::setup(float _x, float _y, int _dim){
     
-        x = _x;
+        x = _x; //why do we do this?
         y = _y;
         dim = _dim;
         
-        speedX = ofRandom(-1,1);
+        speedX = ofRandom(-1,1); //look below for where we use this
         speedY = ofRandom(-1,1);
         rotation = ofRandom(-10,10);
         color.setHsb(ofRandom(255),ofRandom(100,110),ofRandom(200,220));
@@ -33,15 +33,12 @@ void Student::setup(float _x, float _y, int _dim){
         }
     }
 
-//for(int i=0; i<NSTUDENTS; i++){
-//    myStudent[i].moveTowards(mouseX, mouseY);   // or ofGetWidth()/2, ofGetHeight()/2
-//}
-//
-//void Student::moveTowards( float xTarget, float yTarget){
-//    u = 0.95 * x + 0.05 * xTarget;
-//    v = 0.95 * x + 0.05 * yTarget;
-//    
-//}
+
+
+void Student::moveTowards( float xTarget, float yTarget){
+    x = 0.995 * x + 0.005 * xTarget; // x value of artwork will move at .01 speed towards xTarget
+    y = 0.995 * y + 0.005 * yTarget;
+}
 
 
 void Student::update(float _x, float _y, int _dim){

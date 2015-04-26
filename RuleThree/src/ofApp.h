@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "Student.h"
-#define NSTUDENTS 100
+#define NSTUDENTS 100 // define the total number of students. Will I do this per quadrant?
 
 class ofApp : public ofBaseApp{
 
@@ -22,25 +22,14 @@ class ofApp : public ofBaseApp{
         void gotMessage(ofMessage msg);
     
     
-    //----------for lerping from pt A to pt B--------------------
-    ofPoint aStart, bStart;
-    ofPoint bEnd, aEnd;
-    float pct;
-    
     //---------------for drawing a line into a shader------------
     ofFbo       lineFbo;
     ofImage     rockImage;
     ofPolyline  line;
     ofShader    shader;
     
-    
-    Student myStudentA;
-    Student myStudentB;
-    Student myStudentC;
-    Student myStudentD;
-    Student myStudentE;
-    Student myStudentF;
-    Student myStudent[NSTUDENTS];
+
+    Student myStudent[NSTUDENTS]; //call the class Student, call it myStudent, and i'm not sure what NSTUDENTS is really saying
     
     ofTrueTypeFont 	IntroBlack;
     char ThereisOnly[255];

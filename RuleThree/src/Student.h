@@ -15,7 +15,7 @@ class Student{
     void setup(float _x, float _y, int _dim);
     void update(float _x, float _y, int _dim);
     void draw(float _x, float _y, int _dim);
-    
+    void moveTowards( float xTarget, float yTarget);
     
     
     float quadrant;
@@ -31,11 +31,13 @@ class Student{
     float startpt;
     float endpt;
     
-    ofColor color; // id like to set this to RGB,
+    ofColor color; // I make this a HSB spectrum in student.cpp
     
     ofImage studentA, studentB, studentC, studentD, studentE, studentF, img;
 
 
+    
+    
     Student(); // constructor - used to initialize an object, if no properties are passed the program sets them to the default value
     
 private: 

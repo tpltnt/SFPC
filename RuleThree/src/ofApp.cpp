@@ -3,14 +3,6 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    //---------------------------lerp ball------------------
-    
-    aStart.set(0,0); //set the start and end point
-    bStart.set(ofGetWidth(),0);
-    aEnd.set(400, 300);
-    bEnd.set(900, 300);
-
-    pct = 0;
 
     //----------------------style sheets--------------------
     salmon.setHsb(0,140,224);
@@ -21,7 +13,7 @@ void ofApp::setup(){
     royal.setHsb(157,127,181);
     blue.setHsb(133,138,214);
     pink.setHsb(4,43,237);
-    sprintf(ThereisOnly, "THERE IS ONLY WORK");
+  
     IntroBlack.loadFont("Intro Black.otf", 20); //font size
     studentA.loadImage("studentA.png");
     studentB.loadImage("studentB.png");
@@ -45,16 +37,13 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    //--------call student class-------------------
-
-    for(int i=0; i<NSTUDENTS; i++){
-        
-        int size = (i+1) * 10; // defining the size of each ball based on its place in the array
-        int randomX = ofRandom( 0, ofGetWidth() ); //generate a random value bigger than 0 and smaller than our application screen width
-        int randomY = ofRandom( 0, ofGetHeight() ); //generate a random value bigger than 0 and smaller than our application screen height
-        
-        myStudent[i].update(randomX, randomY, 1);
-    }
+    
+    if (ofGetMousePressed()){
+        for(int i=0; i<NSTUDENTS; i++){
+            myStudent[i].moveTowards(ofGetWidth()/2, ofGetHeight()/2);
+        }
+    
+}
 }
 
 //--------------------------------------------------------------
@@ -94,36 +83,8 @@ void ofApp::draw(){
     shader.end();
 
    
-    
-    // in the student object, you'd need something like
-
-    
-    //-------------ball lerp----------------------
-//    for (int i=0; i<50; i ++) {
-//        ofSetColor(ofColor::fuchsia);
-//        aStart.set(0,0);
-//        bEnd.set(ofGetWidth()/2, ofGetHeight()/2);
-//        pct = 0;
-//        float pctShaped =  powf(pct, 0.5);
-//        ofPoint mixPt = (1.0-pctShaped) * aStart + pctShaped * bEnd;
-//        ofSetColor(ofColor::fuchsia);
-//        ofCircle(mixPt*i, 10);
-//        
-//    }
 
 
-        ofSetColor(ofColor::fuchsia);
-        float pctShaped =  powf(pct, 0.5);
-        ofPoint mixPt = (1.0-pctShaped) * aStart + pctShaped * aEnd;
-        ofPoint mixPtB = (1.0-pctShaped) * bStart + pctShaped * bEnd;
-
-        ofSetColor(ofColor::fuchsia);
-        ofCircle(mixPt, 20);
-        ofCircle(mixPtB, 20);
-
-  
-   
-//    }
     
     //--------call student class-------------------
     ofSetColor(255);
@@ -138,10 +99,11 @@ void ofApp::draw(){
     
 
     ofSetColor(255);
-    TaeyoonTeaching.draw(438,242,442,612);
+    TaeyoonTeaching.draw(450,242,442,612);
 
 
 }
+
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
@@ -161,11 +123,7 @@ void ofApp::mouseMoved(int x, int y ){
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
      line.addVertex(ofPoint(x,y));
-        pct += 0.004;
-    
-    if (pct > 1){
-        pct = 0;
-    }
+
 }
 
 
