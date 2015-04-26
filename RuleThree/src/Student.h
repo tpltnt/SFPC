@@ -16,6 +16,7 @@ class Student{
     void update(float _x, float _y, int _dim);
     void draw(float _x, float _y, int _dim);
     void moveTowards( float xTarget, float yTarget);
+
     
     
     float quadrant;

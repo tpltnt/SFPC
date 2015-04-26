@@ -29,7 +29,7 @@ class ofApp : public ofBaseApp{
     ofShader    shader;
     
 
-    Student myStudent[NSTUDENTS]; //call the class Student, call it myStudent, and i'm not sure what NSTUDENTS is really saying
+    Student myStudent[NSTUDENTS]; //call the class Student, call it 'myStudent', and i'm not sure what NSTUDENTS is really saying
     
     ofTrueTypeFont 	IntroBlack;
     char ThereisOnly[255];

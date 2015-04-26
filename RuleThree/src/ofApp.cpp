@@ -21,44 +21,42 @@ void ofApp::setup(){
     TaeyoonTeaching.loadImage("TaeyoonTeaching.png");
     BGtemp.loadImage("BGtemp.png");
     
-    //---------------------load class of Students--------------------------
-        for(int i=0; i<NSTUDENTS; i++){
+    //------load class of Students, tell them what position to start in ------------------
+    for(int i=0; i<NSTUDENTS; i++){ // i've said in .h that NSTUDENTS is 100
         
-        int size = (i+1) * 10; // defining the size of each ball based on its place in the array
-        int randomX = ofRandom( 0, ofGetWidth() ); //generate a random value bigger than 0 and smaller than our application screen width
-        int randomY = ofRandom( 0, ofGetHeight() ); //generate a random value bigger than 0 and smaller than our application screen height
+        int randomX = ofRandom( -1200, ofGetWidth()*2 ); //generate a random value between (a,b)
+        int randomY = ofRandom( -1200, ofGetHeight()*2 ); //generate a random value between (a,b)
         
         myStudent[i].setup(randomX, randomY, 1);
         }
 
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    
+    // for all students, move towards this point
     if (ofGetMousePressed()){
         for(int i=0; i<NSTUDENTS; i++){
-            myStudent[i].moveTowards(ofGetWidth()/2, ofGetHeight()/2);
+            myStudent[i].moveTowards(ofGetWidth()/2, ofGetHeight()/2); // i do not understand this syntax
+            }
         }
-    
-}
+
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofSetColor(255);
+    
     
     //BG------white paper with light blue gridded lines--------------------
     ofBackground(255);
     ofSetColor( ofColor::lightBlue);
     ofSetLineWidth(1);
     for (int i = 0; i < ofGetWidth(); i = i + 20){
-        ofLine(i,0,i, ofGetHeight());
+        ofLine(i,0,i, ofGetHeight()); //draw a line at pt1: i,0, pt2: i,get width
         
     }
-    
     for (int i = 0; i < ofGetHeight(); i = i + 20){
         ofLine(0, i, ofGetWidth(), i);
     }
@@ -68,19 +66,19 @@ void ofApp::draw(){
     lineFbo.begin();
     ofSetColor(salmon);
     ofSetLineWidth(8);
-    line.draw();
+    line.draw(); // this is the main line for the user
     lineFbo.end();
     
-    
-    shader.begin();
-    
-    shader.setUniformTexture("tex0",lineFbo, 0 );
-    shader.setUniformTexture("tex1",rockImage.getTextureReference(), 1 );
-    
-    ofSetColor(255);
-    
-    lineFbo.draw(0,0);
-    shader.end();
+//    
+//    shader.begin();
+//    
+//    shader.setUniformTexture("tex0",lineFbo, 0 );
+//    shader.setUniformTexture("tex1",rockImage.getTextureReference(), 1 ); //i think I need to call these earlier somewhere up top with a #
+//    
+//    ofSetColor(255);
+//    
+//    lineFbo.draw(0,0);
+//    shader.end();
 
    
 
@@ -90,7 +88,7 @@ void ofApp::draw(){
     ofSetColor(255);
     for(int i=0; i<NSTUDENTS; i++){
         
-        int size = (i+1) * 10; // defining the size of each ball based on its place in the array
+        
         int randomX = ofRandom( 0, ofGetWidth() ); //generate a random value bigger than 0 and smaller than our application screen width
         int randomY = ofRandom( 0, ofGetHeight() ); //generate a random value bigger than 0 and smaller than our application screen height
         

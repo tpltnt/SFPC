@@ -36,17 +36,26 @@ void Student::setup(float _x, float _y, int _dim){
 
 
 void Student::moveTowards( float xTarget, float yTarget){
-    x = 0.995 * x + 0.005 * xTarget; // x value of artwork will move at .01 speed towards xTarget
-    y = 0.995 * y + 0.005 * yTarget;
+    
+    float dist = ofDist(x+100,y, xTarget, yTarget);
+    
+    if (dist > 300){
+        x = 0.99 * x + 0.01 * xTarget;
+      y = 0.99 * y + 0.01 * yTarget;
+    }
+  
 }
+
+
+
 
 
 void Student::update(float _x, float _y, int _dim){
     
-    if(x < 0 ){
+    if(x < 0 ){ // if x is less than 0, then speedX is negative ??
         x = 0;
-        speedX *= -1;
-    } else if(x > ofGetWidth()){
+        speedX *= -1; // speedX = speedX * -1
+    } else if(x > ofGetWidth()){ //if x is greater than the canvas, then speedX is also negative ?
         x = ofGetWidth();
         speedX *= -1;
     }
@@ -59,7 +68,7 @@ void Student::update(float _x, float _y, int _dim){
         speedY *= -1;
     }
     
-    x+=speedX;
+    x+=speedX; // x = x + speedX
     y+=speedY;
 }
 
