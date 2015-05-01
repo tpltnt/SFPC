@@ -39,6 +39,10 @@ void ofApp::setup(){
     videofour.setLoopState(OF_LOOP_NORMAL);
     videofour.play();
     
+    videofive.loadMovie("RuleSevenVideoFive.mov");
+    videofive.setLoopState(OF_LOOP_NORMAL);
+    videofive.play();
+    
     allofthetime.loadImage("allofthetime.png");
     arrow.loadImage("arrow.png");
     RuleSevenBG.loadImage("RuleSevenBG.png");
@@ -61,6 +65,7 @@ void ofApp::update(){
     videotwo.update();
     videothree.update();
     videofour.update();
+     videofive.update();
     
 
 
@@ -91,7 +96,8 @@ void ofApp::draw(){
     videoone.draw(350,110,350,200);
     videotwo.draw(990,110,350,200);
     videothree.draw(680,340,350,200);
-    videofour.draw(40,340,330,200);
+    videofour.draw(340,540,330,200);
+    videofive.draw(40,340,330,200);
     
     
     ofSetColor(255);

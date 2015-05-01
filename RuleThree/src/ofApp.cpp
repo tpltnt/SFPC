@@ -15,34 +15,71 @@ void ofApp::setup(){
     pink.setHsb(4,43,237);
   
     IntroBlack.loadFont("Intro Black.otf", 20); //font size
-    studentA.loadImage("studentA.png");
-    studentB.loadImage("studentB.png");
-    studentC.loadImage("studentC.png");
+
     TaeyoonTeaching.loadImage("TaeyoonTeaching.png");
     BGtemp.loadImage("BGtemp.png");
     
     //------load class of Students, tell them what position to start in ------------------
     for(int i=0; i<NSTUDENTS; i++){ // i've said in .h that NSTUDENTS is 100
         
-        int randomX = ofRandom( -1200, ofGetWidth()*2 ); //generate a random value between (a,b)
-        int randomY = ofRandom( -1200, ofGetHeight()*2 ); //generate a random value between (a,b)
         
-        myStudent[i].setup(randomX, randomY, 1);
-        }
+    float radius = ofRandom(700,2500);      // <---- pick a random distance away from the center
+    float angle = ofRandom(0, TWO_PI);     // <---- pick a random angle
+    float centerX = ofGetWidth()/2;    // <----- this is the center of the circle x
+    float centerY = ofGetHeight()/2;   // <------ also, center of the circle y
+    float x = centerX + radius * cos(angle);   // <---- this is using the circle formula we discussed in class
+    float y = centerY + radius * sin(angle);
+        
+        string fileName;
+        float dy =  ofGetHeight()/2 - y;
+        float dx = ofGetWidth()/2 - x;
+        float angle2 = atan2(dy, dx ) * RAD_TO_DEG;
+        
+        cout << angle2 << endl;
+        
+        
+        if (angle2 >= 0 && angle2 < 60){
+            fileName = "studentD.png";
+        } else if (angle2 >= 60 && angle2 < 120){
+            fileName = "studentF.png";
+        } else if (angle2 >= 120 && angle2 < 180){
+            fileName = "studentC.png";
+        } else if (angle2 < 0 && angle2 >= -60){
+                fileName = "studentB.png";
+        } else if (angle2 < -60 && angle2 >= -120){ // -60  --120
+            fileName = "studentD.png";
+        } else if (angle2 < -120 && angle2 >= -180){
+            fileName = "studentE.png";
+      }
+        myStudents[i].setup(x,y, fileName);   // <----- now, this is where they should be setup....
+        
+        
+        myStudents[i].stopPoint.x = 645 + myStudents[i].varDistance * cos(angle);
+        myStudents[i].stopPoint.y = 366 + myStudents[i].varDistance * sin(angle);
+        
 
-    
+    }
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    
     // for all students, move towards this point
     if (ofGetMousePressed()){
         for(int i=0; i<NSTUDENTS; i++){
-            myStudent[i].moveTowards(ofGetWidth()/2, ofGetHeight()/2); // i do not understand this syntax
-            }
+        myStudents[i].moveTowards(645, 366);
+        
         }
-
+    }
+//    if (ofGetMousePressed()){
+//        for(int i=0; i<NSTUDENTS; i++){
+//            if(ofRandom(0,1) > 0.5) {
+//                myStudents[i].moveTowards(645, 366, ofRandom(100,1000));
+//            } else {
+//                myStudents[i].moveTowardsB(645, 366, ofRandom(100,1000));
+//                    }
+//                }
+//            }
 }
 
 //--------------------------------------------------------------
@@ -60,16 +97,15 @@ void ofApp::draw(){
     for (int i = 0; i < ofGetHeight(); i = i + 20){
         ofLine(0, i, ofGetWidth(), i);
     }
- 
-    
-    
-    lineFbo.begin();
+
+//    lineFbo.begin();
     ofSetColor(salmon);
-    ofSetLineWidth(8);
+    ofSetLineWidth(7);
     line.draw(); // this is the main line for the user
-    lineFbo.end();
+//    lineFbo.end();
+  
     
-//    
+ //-----shader not woring, eventhough in data/bin, abandoning it for now-----------
 //    shader.begin();
 //    
 //    shader.setUniformTexture("tex0",lineFbo, 0 );
@@ -81,9 +117,6 @@ void ofApp::draw(){
 //    shader.end();
 
    
-
-
-    
     //--------call student class-------------------
     ofSetColor(255);
     for(int i=0; i<NSTUDENTS; i++){
@@ -92,7 +125,7 @@ void ofApp::draw(){
         int randomX = ofRandom( 0, ofGetWidth() ); //generate a random value bigger than 0 and smaller than our application screen width
         int randomY = ofRandom( 0, ofGetHeight() ); //generate a random value bigger than 0 and smaller than our application screen height
         
-        myStudent[i].draw(randomX, randomY, 1);
+        myStudents[i].draw();
     }
     
 
@@ -120,8 +153,13 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-     line.addVertex(ofPoint(x,y));
+    
+       if (mouseX > 484 && mouseX < 800 && mouseY <474 && mouseY > 300){
+    line.addVertex(ofPoint(x,y));
+             }
 
+    cout << mouseX << endl;
+    cout << mouseY << endl;
 }
 
 

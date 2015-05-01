@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "Student.h"
-#define NSTUDENTS 100 // define the total number of students. Will I do this per quadrant?
+#define NSTUDENTS 400 // define the total number of students. Will I do this per quadrant?
 
 class ofApp : public ofBaseApp{
 
@@ -29,7 +29,7 @@ class ofApp : public ofBaseApp{
     ofShader    shader;
     
 
-    Student myStudent[NSTUDENTS]; //call the class Student, call it 'myStudent', and i'm not sure what NSTUDENTS is really saying
+    Student myStudents[NSTUDENTS]; //call the class Student, call it 'myStudent', and i'm not sure what NSTUDENTS is really saying
     
     ofTrueTypeFont 	IntroBlack;
     char ThereisOnly[255];

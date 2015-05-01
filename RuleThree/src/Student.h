@@ -12,9 +12,10 @@ class Student{
     
     
     public :
-    void setup(float _x, float _y, int _dim);
+    void setup(float _x, float _y, string fileName);
     void update(float _x, float _y, int _dim);
-    void draw(float _x, float _y, int _dim);
+    void draw();
+//  void draw(float _x, float _y, int _dim);
     void moveTowards( float xTarget, float yTarget);
 
     
@@ -31,6 +32,10 @@ class Student{
     int dim;      // size
     float startpt;
     float endpt;
+    float varDistance;
+    float varSpeedX;
+    
+    ofPoint stopPoint;
     
     ofColor color; // I make this a HSB spectrum in student.cpp
     

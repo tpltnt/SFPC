@@ -4,47 +4,60 @@
 Student::Student(){
 }
 
-void Student::setup(float _x, float _y, int _dim){
+void Student::setup(float _x, float _y, string fileName){
+    
+    varSpeedX = ofRandom(.99,.999);
+
     
         x = _x; //why do we do this?
         y = _y;
-        dim = _dim;
         
         speedX = ofRandom(-1,1); //look below for where we use this
         speedY = ofRandom(-1,1);
         rotation = ofRandom(-10,10);
         color.setHsb(ofRandom(255),ofRandom(100,110),ofRandom(200,220));
     
-        studentA.loadImage("studentA.png"); //load all 6 images
-        studentB.loadImage("studentB.png");
-        studentC.loadImage("studentC.png");
-        studentD.loadImage("studentD.png");
-        studentE.loadImage("studentE.png");
-        studentF.loadImage("studentF.png");
+    img.loadImage(fileName);
+    cout << fileName  << " " << img.width << endl;
+
    
+    varDistance = ofRandom(300,900);
     
-    float randomVal = ofRandom(0,1); //randomly select A,B,or C
-    if (randomVal < 0.33){
-        img.loadImage("studentA.png");
-    } else if (randomVal >= 0.33 && randomVal < 0.66){
-        img.loadImage("studentB.png");
-    } else {
-        img.loadImage("studentC.png");
-        }
+
     }
+
+
 
 
 
 void Student::moveTowards( float xTarget, float yTarget){
+   
     
-    float dist = ofDist(x+100,y, xTarget, yTarget);
+//    // (a) calculate my angle from the center of the screen
+//    float dy = yTarget - y;
+//    float dx = xTarget - x;
+//    float myAngle = atan2(dy, dx);
+//    
+//    // (b) project based on varDistance where I should stop
+//    float xStop = xTarget + 100 * cos(myAngle);
+//    float yStop = yTarget + 100 * sin(myAngle);
+    x = varSpeedX * x + (1-varSpeedX) * stopPoint.x;
+    y = varSpeedX * y + (1-varSpeedX) * stopPoint.y;
+//    
     
-    if (dist > 300){
-        x = 0.99 * x + 0.01 * xTarget;
-      y = 0.99 * y + 0.01 * yTarget;
-    }
+    
+    
+//    float dist = ofDist(x,y, xTarget, yTarget);
+//    
+//    if (dist > varDistance){
+//        x = varSpeedX * x + (1-varSpeedX) * xTarget;
+//        y = varSpeedX * y + (1-varSpeedX) * yTarget;
+//    }
   
 }
+
+
+//}
 
 
 
@@ -52,34 +65,34 @@ void Student::moveTowards( float xTarget, float yTarget){
 
 void Student::update(float _x, float _y, int _dim){
     
-    if(x < 0 ){ // if x is less than 0, then speedX is negative ??
-        x = 0;
-        speedX *= -1; // speedX = speedX * -1
-    } else if(x > ofGetWidth()){ //if x is greater than the canvas, then speedX is also negative ?
-        x = ofGetWidth();
-        speedX *= -1;
-    }
-    
-    if(y < 0 ){
-        y = 0;
-        speedY *= -1;
-    } else if(y > ofGetHeight()){
-        y = ofGetHeight();
-        speedY *= -1;
-    }
-    
-    x+=speedX; // x = x + speedX
-    y+=speedY;
+//    if(x < 0 ){ // if x is less than 0, then speedX is negative ??
+//        x = 0;
+//        speedX *= -1; // speedX = speedX * -1
+//    } else if(x > ofGetWidth()){ //if x is greater than the canvas, then speedX is also negative ?
+//        x = ofGetWidth();
+//        speedX *= -1;
+//    }
+//    
+//    if(y < 0 ){
+//        y = 0;
+//        speedY *= -1;
+//    } else if(y > ofGetHeight()){
+//        y = ofGetHeight();
+//        speedY *= -1;
+//    }
+//    
+//    x+=speedX; // x = x + speedX
+//    y+=speedY;
 }
 
-void Student::draw(float _x, float _y, int _dim){
+void Student::draw(){
     
     ofPushStyle();
     ofPushMatrix();
     
     ofSetColor(color);
     
-img.draw(x,y,80,180);
+img.draw(x,y,83,180);
 
     
     ofPopMatrix();
