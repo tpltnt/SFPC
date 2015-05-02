@@ -11,7 +11,7 @@ class spring {
 
 		spring();
 		
-		particle * particleA;
+		particle * particleA; //what is this?
 		particle * particleB;
 		
 		float distance;

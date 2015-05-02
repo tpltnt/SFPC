@@ -8,14 +8,14 @@ spring::spring(){
 
 //---------------------------------------------------------------------
 void spring::update(){
-	if ((particleA == NULL) || (particleB == NULL)){
+	if ((particleA == NULL) || (particleB == NULL)){ //what do double pipes mean
 		return;
 	}
 	
-	ofVec2f pta = particleA->pos;
+	ofVec2f pta = particleA->pos; //stores a 2 dimentional vector
 	ofVec2f ptb = particleB->pos;
 	
-	float theirDistance = (pta - ptb).length();
+	float theirDistance = (pta - ptb).length(); //find the length of the fistance from pta to ptb
 	float springForce = (springiness * (distance - theirDistance));
 	ofVec2f frcToAdd = (pta-ptb).normalized() * springForce;
 	
@@ -27,9 +27,9 @@ void spring::update(){
 //---------------------------------------------------------------------
 void spring::draw(){
 	
-	if ((particleA == NULL) || (particleB == NULL)){
+    if ((particleA == NULL) || (particleB == NULL)){ //what do double pipes mean
 		return;
 	}
 	
-	ofLine(particleA->pos.x, particleA->pos.y, particleB->pos.x, particleB->pos.y);
+	ofLine(particleA->pos.x, particleA->pos.y, particleB->pos.x, particleB->pos.y); //if...draw a line, no balls are drawn here
 }

@@ -6,6 +6,7 @@ particle::particle(){
 	setInitialCondition(0,0,0,0);
 	damping = 0.1f; // what is damping
 	bFixed = false;
+    Head.loadImage("Head.png");
 }
 
 //------------------------------------------------------------
@@ -248,7 +249,11 @@ void particle::update(){
 
 //------------------------------------------------------------
 void particle::draw(){
+    ofSetColor(73,66,54,0);
     ofCircle(pos.x, pos.y, 10);
+    ofSetColor(255);
+    Head.draw(pos.x-40, pos.y-30,100,127);
+    ofSetColor(73,66,54);
 }
 
 
