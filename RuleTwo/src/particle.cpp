@@ -9,6 +9,14 @@ particle::particle(){
     Head.loadImage("Head.png");
 }
 
+////------------------------------------------------------------
+//particle::particleMain(){
+//    setInitialCondition(0,0,0,0);
+//    damping = 0.1f; // what is damping
+//    bFixed = false;
+//
+//}
+
 //------------------------------------------------------------
 void particle::resetForce(){
     // we reset the forces every frame
