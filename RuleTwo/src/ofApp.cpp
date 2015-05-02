@@ -13,6 +13,8 @@ void ofApp::setup(){
     pink.setHsb(4,43,237);
     Head.loadImage("Head.png");
     Ring.loadImage("Circle.png");
+    PullEverything.loadImage("PullEverything.png");
+    GeneralDuties.loadImage("GeneralDuties.png");
     
     ofSetVerticalSync(true);
     ofSetFrameRate(60);
@@ -20,7 +22,7 @@ void ofApp::setup(){
     
     for (int i = 0; i < 8; i++){ //draw all 8 particles
         particle myParticle;
-        myParticle.setInitialCondition(ofRandom(500,550),ofRandom(500,550),0,0);
+        myParticle.setInitialCondition(ofRandom(500,550),ofRandom(500,550),0,0); //
         particles.push_back(myParticle);
     }
     
@@ -88,7 +90,9 @@ void ofApp::draw(){
         ofLine(0, i, ofGetWidth(), i);
         
     }
-    
+    ofSetColor(brown);
+    GeneralDuties.draw(50,50,431,50);
+    PullEverything.draw(400,750,426,117);
     
     //----------balls
     float sinOfTime				= sin( ofGetElapsedTimef() );
@@ -99,6 +103,7 @@ void ofApp::draw(){
     
     sin(ofGetElapsedTimef()); // moves from -1 and 1 every 2Pi seconds
     float sinValue = sin(ofGetElapsedTimef()*2);
+       float sinValueB = sin(ofGetElapsedTimef()*1.5);
      float cosinValue = cos(ofGetElapsedTimef()*2);
     ofColor c;
     c.set(ofColor::pink);
@@ -110,27 +115,57 @@ void ofApp::draw(){
     int opacityPressed = 50; //I will replace this with an equation
     int ring1x, ring1y, ring2x, ring2y, ring3x, ring3y, ring4x, ring4y, ring5x, ring5y, ring6x, ring6y, ring7x, ring7y;
     
-    ring1x =490+sinValue*17;
+    int circleRad = 150;
+    int FillCircleRad = circleRad-3;
+    ring1x =490+sinValue*27;
     ring1y =490+cosinValue*17;
-    ring2x =190+sinValue*17;
+    ring2x =190+sinValueB*17;
     ring2y =190+cosinValue*17;
     ring3x =790+sinValue*27;
     ring3y =190+cosinValue*27;
+    ring4x =990+sinValueB*27;
+    ring4y =590+cosinValue*-37;
+    ring5x =1100+sinValueB*27;
+    ring5y =90+cosinValue*-37;
+    ring6x =90+sinValueB*27;
+    ring6y =600+cosinValue*-37;
+    ring7x =400+sinValue*27;
+    ring7y =110+cosinValue*17;
     
-    ofSetColor(salmon);
-    Ring.draw(ring1x,ring1y,300,300);
+    ofSetColor(salmon); // red
+    Ring.draw(ring1x,ring1y,circleRad*2,circleRad*2);
     ofSetColor(224,103,99,opacityPressed);
-    ofCircle(ring1x+150,ring1y+150,149);
+    ofCircle(ring1x+circleRad,ring1y+circleRad,FillCircleRad);
     
     ofSetColor(140,207,160); //green
-    Ring.draw(ring2x,ring2y,300,300);
+    Ring.draw(ring2x,ring2y,circleRad*2,circleRad*2);
     ofSetColor(140,207,160,opacityPressed);
-    ofCircle(ring2x+150,ring2y+150,149);
+    ofCircle(ring2x+circleRad,ring2y+circleRad,FillCircleRad);
     
     ofSetColor(98,196,215); //bue
-    Ring.draw(ring3x,ring3y,300,300);
+    Ring.draw(ring3x,ring3y,circleRad*2,circleRad*2);
     ofSetColor(98,196,215,opacityPressed);
-    ofCircle(ring3x+150,ring3y+150,149);
+    ofCircle(ring3x+circleRad,ring3y+circleRad,FillCircleRad);
+    
+    ofSetColor(91,116,183); //drkbue
+    Ring.draw(ring4x,ring4y,circleRad*2,circleRad*2);
+    ofSetColor(91,116,183,opacityPressed);
+    ofCircle(ring4x+circleRad,ring4y+circleRad,FillCircleRad);
+    
+    ofSetColor(236,214,95); //yellow
+    Ring.draw(ring5x,ring5y,circleRad*2,circleRad*2);
+    ofSetColor(236,214,95,opacityPressed);
+    ofCircle(ring5x+circleRad,ring5y+circleRad,FillCircleRad);
+    
+    ofSetColor(150,107,138); //purple
+    Ring.draw(ring6x,ring6y,circleRad*2,circleRad*2);
+    ofSetColor(150,107,138,opacityPressed);
+    ofCircle(ring6x+circleRad,ring6y+circleRad,FillCircleRad);
+    
+    ofSetColor(243,167,153); //pink
+    Ring.draw(ring7x,ring7y,circleRad*2,circleRad*2);
+    ofSetColor(243,167,153,opacityPressed);
+    ofCircle(ring7x+circleRad,ring7y+circleRad,FillCircleRad);
 
     
     

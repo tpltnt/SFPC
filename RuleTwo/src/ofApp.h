@@ -26,6 +26,8 @@ class ofApp : public ofBaseApp{
     
     ofImage Head;
     ofImage Ring;
+    ofImage GeneralDuties;
+    ofImage PullEverything;
     
     ofColor salmon;
     ofColor tan;
