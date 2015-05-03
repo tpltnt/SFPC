@@ -9,6 +9,14 @@ particle::particle(){
     Head.loadImage("Head.png");
 }
 
+//------------------------------------------------------------
+particleMain::particleMain(){
+    setInitialCondition(0,0,0,0);
+    damping = 0.1f; // what is damping
+    bFixed = false;
+    Head.loadImage("Head.png");
+}
+
 ////------------------------------------------------------------
 //particle::particleMain(){
 //    setInitialCondition(0,0,0,0);
@@ -257,10 +265,17 @@ void particle::update(){
 
 //------------------------------------------------------------
 void particle::draw(){
-    ofSetColor(73,66,54,0);
+    ofSetColor(73,66,54);
     ofCircle(pos.x, pos.y, 10);
+//    ofSetColor(255);
+//    Head.draw(pos.x-40, pos.y-30,95,120);
+//    ofSetColor(73,66,54);
+}
+
+//------------------------------------------------------------
+void particleMain::draw(){
     ofSetColor(255);
-    Head.draw(pos.x-40, pos.y-30,100,127);
+    Head.draw(pos.x-40, pos.y-30,95,120);
     ofSetColor(73,66,54);
 }
 

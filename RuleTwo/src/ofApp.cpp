@@ -27,12 +27,13 @@ void ofApp::setup(){
     }
     
     particles[0].bFixed = true;
+
     
     for (int i = 1; i < particles.size(); i++){
         spring mySpring;
         mySpring.distance		= 200;
-        mySpring.springiness	= 0.1f;
-        mySpring.particleA = & (particles[0 ]); //is this my main/center particle?
+        mySpring.springiness	= 0.05f;
+        mySpring.particleA = & (particles[0]); //is this my main/center particle?
         mySpring.particleB = & (particles[i]);
         springs.push_back(mySpring);
     }
@@ -77,46 +78,52 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    //BG------white paper with light blue gridded lines--------------------
+    
+//------draw gridded paper and type--------------------
     ofBackground(255);
     ofSetColor( ofColor::lightBlue);
     ofSetLineWidth(1);
     for (int i = 0; i < ofGetWidth(); i = i + 20){
         ofLine(i,0,i, ofGetHeight());
-        
-    }
-    
+        }
     for (int i = 0; i < ofGetHeight(); i = i + 20){
         ofLine(0, i, ofGetWidth(), i);
-        
-    }
+        }
     ofSetColor(brown);
     GeneralDuties.draw(50,50,431,50);
     PullEverything.draw(400,750,426,117);
     
-    //----------balls
-    float sinOfTime				= sin( ofGetElapsedTimef() );
-    float sinOfTimeMapped		= ofMap( sinOfTime, -1, 1, 0, 255);
     
-    float sinOfTime2			= sin( ofGetElapsedTimef() + PI);
-    float sinOfTimeMapped2		= ofMap( sinOfTime2, -1, 1, 0, 255);
+    
+//----------variables for circles-------------------------------------------------
+    
+    int opacityPressed;
+    int ring1x, ring1y, ring2x, ring2y, ring3x, ring3y, ring4x, ring4y, ring5x, ring5y, ring6x, ring6y, ring7x, ring7y;
+    int circleRad = 150;
+    int FillCircleRad = circleRad-3;
+    
+//------ask if particles are inside the circle------
+    bool bAnyNotInMe = false;
+    for (int i = 0; i < particles.size(); i++){
+        if (  (circlePos1 - particles[i].pos).length() > FillCircleRad){
+            bAnyNotInMe = true;
+        }
+    }
+    
+    if (bAnyNotInMe == false){  // ok all particles are inside:
+        opacityPressed = 100; //I wnat to lerp this from 0 to 100, so it's smooth
+    } else {
+        opacityPressed = 0;
+    }
+    
+//-------------seven random floaty movements-------------
+//---can I condense all of this by using OFRandom and do the next 3 steps in one step-----
     
     sin(ofGetElapsedTimef()); // moves from -1 and 1 every 2Pi seconds
     float sinValue = sin(ofGetElapsedTimef()*2);
-       float sinValueB = sin(ofGetElapsedTimef()*1.5);
-     float cosinValue = cos(ofGetElapsedTimef()*2);
-    ofColor c;
-    c.set(ofColor::pink);
-    c.lerp( ofColor::blue,  ofMap(mouseX, 0, ofGetWidth(), 0, 1, true));
-    ofSetColor(c);
-
+    float sinValueB = sin(ofGetElapsedTimef()*1.5);
+    float cosinValue = cos(ofGetElapsedTimef()*2);
     
-    //----------rings----------------------------------------------------
-    int opacityPressed = 50; //I will replace this with an equation
-    int ring1x, ring1y, ring2x, ring2y, ring3x, ring3y, ring4x, ring4y, ring5x, ring5y, ring6x, ring6y, ring7x, ring7y;
-    
-    int circleRad = 150;
-    int FillCircleRad = circleRad-3;
     ring1x =490+sinValue*27;
     ring1y =490+cosinValue*17;
     ring2x =190+sinValueB*17;
@@ -131,47 +138,62 @@ void ofApp::draw(){
     ring6y =600+cosinValue*-37;
     ring7x =400+sinValue*27;
     ring7y =110+cosinValue*17;
+
+    circlePos1 = ofPoint(ring1x+circleRad,ring1y+circleRad);
+    circlePos2 = ofPoint(ring2x+circleRad,ring2y+circleRad);
+    circlePos3 = ofPoint(ring3x+circleRad,ring3y+circleRad);
+    circlePos4 = ofPoint(ring4x+circleRad,ring4y+circleRad);
+    circlePos5 = ofPoint(ring5x+circleRad,ring5y+circleRad);
+    circlePos6 = ofPoint(ring6x+circleRad,ring6y+circleRad);
+    circlePos7 = ofPoint(ring7x+circleRad,ring7y+circleRad);
     
+    
+//-----maybe i can turn the above into a forloop?--------
+//    for (int i = 0; i < 8; i++) {
+//        circlePos.[i] = ofPoint(ring[i].x, ring[i].y+circleRad);
+//    ofCircle(circlePos.[i],FillCircleRad);
+//    }
+    
+//-----draw outer ring at 100% and circle at variable opacity------------
     ofSetColor(salmon); // red
     Ring.draw(ring1x,ring1y,circleRad*2,circleRad*2);
     ofSetColor(224,103,99,opacityPressed);
-    ofCircle(ring1x+circleRad,ring1y+circleRad,FillCircleRad);
+    ofCircle(circlePos1,FillCircleRad);
     
     ofSetColor(140,207,160); //green
     Ring.draw(ring2x,ring2y,circleRad*2,circleRad*2);
     ofSetColor(140,207,160,opacityPressed);
-    ofCircle(ring2x+circleRad,ring2y+circleRad,FillCircleRad);
+    ofCircle(circlePos2,FillCircleRad);
     
     ofSetColor(98,196,215); //bue
     Ring.draw(ring3x,ring3y,circleRad*2,circleRad*2);
     ofSetColor(98,196,215,opacityPressed);
-    ofCircle(ring3x+circleRad,ring3y+circleRad,FillCircleRad);
+    ofCircle(circlePos3,FillCircleRad);
     
     ofSetColor(91,116,183); //drkbue
     Ring.draw(ring4x,ring4y,circleRad*2,circleRad*2);
     ofSetColor(91,116,183,opacityPressed);
-    ofCircle(ring4x+circleRad,ring4y+circleRad,FillCircleRad);
+    ofCircle(circlePos4,FillCircleRad);
     
     ofSetColor(236,214,95); //yellow
     Ring.draw(ring5x,ring5y,circleRad*2,circleRad*2);
     ofSetColor(236,214,95,opacityPressed);
-    ofCircle(ring5x+circleRad,ring5y+circleRad,FillCircleRad);
+    ofCircle(circlePos5,FillCircleRad);
     
     ofSetColor(150,107,138); //purple
     Ring.draw(ring6x,ring6y,circleRad*2,circleRad*2);
     ofSetColor(150,107,138,opacityPressed);
-    ofCircle(ring6x+circleRad,ring6y+circleRad,FillCircleRad);
+    ofCircle(circlePos6,FillCircleRad);
     
     ofSetColor(243,167,153); //pink
     Ring.draw(ring7x,ring7y,circleRad*2,circleRad*2);
     ofSetColor(243,167,153,opacityPressed);
-    ofCircle(ring7x+circleRad,ring7y+circleRad,FillCircleRad);
+    ofCircle(circlePos7,FillCircleRad);
 
     
-    
+   
 
-    
-    //---------------springs----------------
+//---------------springs and  particles----------------
     ofSetColor(brown);
     for (int i = 0; i < particles.size(); i++){
         particles[i].draw();
@@ -181,8 +203,7 @@ void ofApp::draw(){
         springs[i].draw();
     }
     
-  
-
+    
 }
 
 //--------------------------------------------------------------
@@ -194,7 +215,9 @@ void ofApp::keyPressed(int key){
             // reposition everything:
             for (int i = 0; i < particles.size(); i++){
                 particles[i].setInitialCondition(ofRandom(0,ofGetWidth()),ofRandom(0,ofGetHeight()),0,0);
+            
             }
+            
             break;
     }
 
@@ -214,6 +237,7 @@ void ofApp::mouseMoved(int x, int y ){
 void ofApp::mouseDragged(int x, int y, int button){
     
     particles[0].pos.set(mouseX, mouseY);
+   
     /*particles.erase(particles.begin());
      particle myParticle;
      myParticle.setInitialCondition(x,y,0,0);

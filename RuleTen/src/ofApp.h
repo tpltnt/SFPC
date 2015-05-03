@@ -26,6 +26,7 @@ public:
     ofParameter <float> radiusA;
     ofParameter <float> noiseModFactorA;
     ofParameter <float> velocityA;
+    ofParameter <float> LineWeightA;
     
     ofxPanel panelB;
     ofParameter <int> peaksB;
@@ -33,6 +34,7 @@ public:
     ofParameter <float> radiusB;
     ofParameter <float> noiseModFactorB;
     ofParameter <float> velocityB;
+     ofParameter <float> LineWeightB;
     
     ofTrueTypeFont 	IntroBlack;
     ofTrueTypeFont 	IntroBlackLrg;

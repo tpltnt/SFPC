@@ -1,119 +1,119 @@
 #include "ofApp.h"
 
-void ofApp::drawanH(float xPos, float yPos, float scale){
-
-ofPushMatrix(); // we're going to push this thing
-    ofTranslate(xPos, yPos); // push it this far. Why is this a variable and not a fixed number?
-    ofScale(scale, scale); //scale it this much
-    ofSetColor(MedAqua);
-    float triangleX = 100;
-    if (ofGetFrameNum() % 12 == 0){
-    ofTriangle(100,100,150,150,100,200);
-    }
-    if (ofGetFrameNum() % 12 == 1){
-    ofTriangle(100+20,100,150+20,150,100+20,200);
-    }
-    if (ofGetFrameNum() % 12 == 2){
-    ofTriangle(100+40,100,150+40,150,100+40,200);
-    }
-    if (ofGetFrameNum() % 12 == 3){
-    ofTriangle(100+60,100,150+60,150,100+60,200);
-    }
-    if (ofGetFrameNum() % 12 == 4){
-    ofTriangle(100+80,100,150+80,150,100+80,200);
-    }
-    if (ofGetFrameNum() % 12 == 5){
-    ofTriangle(100+100,100,150+100,150,100+100,200);
-    }
-    if (ofGetFrameNum() % 12 == 6){
-    ofTriangle(100+140,100,150+140,150,100+140,200);
-    }
-    if (ofGetFrameNum() % 12 == 7){
-    ofTriangle(100+160,100,150+160,150,100+160,200);
-    }
-    if (ofGetFrameNum() % 12 == 8){
-    ofTriangle(100+180,100,150+180,150,100+180,200);
-    }
-    if (ofGetFrameNum() % 12 == 9){
-    ofTriangle(100+220,100,150+220,150,100+220,200);
-    }
-    if (ofGetFrameNum() % 12 == 10){
-    ofTriangle(100+240,100,150+240,150,100+240,200);
-    }
-    if (ofGetFrameNum() % 12 == 11){
-    ofTriangle(100+270,100,150+270,150,100+270,200);
-    }
-    else if (ofGetFrameNum() % 12 == 12){
-    ofTriangle(100+300,100,150+300,150,100+300,200);
-    }
-
-    ofSetColor(Salmon);
-
-    if (ofGetFrameNum() % 12 == 1){
-    ofTriangle(70,100,120,150,70,200);
-    }
-    if (ofGetFrameNum() % 12 == 2){
-    ofTriangle(100,100,150,150,100,200);
-    }
-    if (ofGetFrameNum() % 12 == 3){
-    ofTriangle(100+20,100,150+20,150,100+20,200);
-    }
-    if (ofGetFrameNum() % 12 == 4){
-    ofTriangle(100+40,100,150+40,150,100+40,200);
-    }
-    if (ofGetFrameNum() % 12 == 5){
-    ofTriangle(100+70,100,150+70,150,100+70,200);
-    }
-    if (ofGetFrameNum() % 12 == 6){
-    ofTriangle(100+100,100,150+100,150,100+100,200);
-    }
-    if (ofGetFrameNum() % 12 == 7){
-    ofTriangle(100+130,100,150+130,150,100+130,200);
-    }
-    if (ofGetFrameNum() % 12 == 8){
-    ofTriangle(100+160,100,150+160,150,100+160,200);
-    }
-    if (ofGetFrameNum() % 12 == 9){
-    ofTriangle(100+180,100,150+180,150,100+180,200);
-    }
-    if (ofGetFrameNum() % 12 == 10){
-    ofTriangle(100+200,100,150+200,150,100+200,200);
-    }
-    if (ofGetFrameNum() % 12 == 11){
-    ofTriangle(100+220,100,150+220,150,100+220,200);
-    }
-    if (ofGetFrameNum() % 12 == 12){
-    ofTriangle(100+240,100,150+240,150,100+240,200);
-    }
-    else if (ofGetFrameNum() % 12 == 0){
-    ofTriangle(100+260,100,150+260,150,100+260,200);
-    }
-ofPopMatrix();
-
-float animateAtime = 1.0; // does 1 mean 1 second?
-float animateBtime = 1.0;  // assume that b is first
-float totalAnimatetime = animateAtime + animateBtime;
-float currentTime = ofGetElapsedTimef(); // get the current time
-float timeInAnimation = currentTime;
-while (timeInAnimation > totalAnimatetime){ //while the current time is greater than A-B
-    timeInAnimation -= totalAnimatetime; // this is like fmod for time (I can explain)
-} //now we've gotten a value that counts up to 2 seconds every two seconds.  Now some logic to figure out what pct of a and b we've done given time
-float apct = ofMap(timeInAnimation -animateBtime , 0,
-                   animateAtime, 0,1, true);  // the minus animateBtime is cause b is assumed first
-float bpct = ofMap(timeInAnimation, 0,
-                   animateBtime, 0,1, true);
-float cpct = ofMap(timeInAnimation+1, 0,
-                   animateBtime, 0,1, true);
-float a = ofMap(apct, 0,1,0,100); // what do these numbers mean?
-float b = ofMap(bpct, 0,1,0,100);
-float c = ofMap(cpct, 0,1,0,100);
-ofLine(600,b,600,c);
-ofSetColor(MedAqua);
-ofLine(590,a,590,b);
-ofSetColor(Pink);
-ofLine(500,b,500,a);
-ofLine(510,a,510,b);
-}
+//void ofApp::drawanH(float xPos, float yPos, float scale){
+//
+//ofPushMatrix(); // we're going to push this thing
+//    ofTranslate(xPos, yPos); // push it this far. Why is this a variable and not a fixed number?
+//    ofScale(scale, scale); //scale it this much
+//    ofSetColor(MedAqua);
+//    float triangleX = 100;
+//    if (ofGetFrameNum() % 12 == 0){
+//    ofTriangle(100,100,150,150,100,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 1){
+//    ofTriangle(100+20,100,150+20,150,100+20,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 2){
+//    ofTriangle(100+40,100,150+40,150,100+40,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 3){
+//    ofTriangle(100+60,100,150+60,150,100+60,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 4){
+//    ofTriangle(100+80,100,150+80,150,100+80,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 5){
+//    ofTriangle(100+100,100,150+100,150,100+100,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 6){
+//    ofTriangle(100+140,100,150+140,150,100+140,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 7){
+//    ofTriangle(100+160,100,150+160,150,100+160,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 8){
+//    ofTriangle(100+180,100,150+180,150,100+180,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 9){
+//    ofTriangle(100+220,100,150+220,150,100+220,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 10){
+//    ofTriangle(100+240,100,150+240,150,100+240,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 11){
+//    ofTriangle(100+270,100,150+270,150,100+270,200);
+//    }
+//    else if (ofGetFrameNum() % 12 == 12){
+//    ofTriangle(100+300,100,150+300,150,100+300,200);
+//    }
+//
+//    ofSetColor(Salmon);
+//
+//    if (ofGetFrameNum() % 12 == 1){
+//    ofTriangle(70,100,120,150,70,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 2){
+//    ofTriangle(100,100,150,150,100,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 3){
+//    ofTriangle(100+20,100,150+20,150,100+20,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 4){
+//    ofTriangle(100+40,100,150+40,150,100+40,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 5){
+//    ofTriangle(100+70,100,150+70,150,100+70,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 6){
+//    ofTriangle(100+100,100,150+100,150,100+100,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 7){
+//    ofTriangle(100+130,100,150+130,150,100+130,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 8){
+//    ofTriangle(100+160,100,150+160,150,100+160,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 9){
+//    ofTriangle(100+180,100,150+180,150,100+180,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 10){
+//    ofTriangle(100+200,100,150+200,150,100+200,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 11){
+//    ofTriangle(100+220,100,150+220,150,100+220,200);
+//    }
+//    if (ofGetFrameNum() % 12 == 12){
+//    ofTriangle(100+240,100,150+240,150,100+240,200);
+//    }
+//    else if (ofGetFrameNum() % 12 == 0){
+//    ofTriangle(100+260,100,150+260,150,100+260,200);
+//    }
+//ofPopMatrix();
+//
+//float animateAtime = 1.0; // does 1 mean 1 second?
+//float animateBtime = 1.0;  // assume that b is first
+//float totalAnimatetime = animateAtime + animateBtime;
+//float currentTime = ofGetElapsedTimef(); // get the current time
+//float timeInAnimation = currentTime;
+//while (timeInAnimation > totalAnimatetime){ //while the current time is greater than A-B
+//    timeInAnimation -= totalAnimatetime; // this is like fmod for time (I can explain)
+//} //now we've gotten a value that counts up to 2 seconds every two seconds.  Now some logic to figure out what pct of a and b we've done given time
+//float apct = ofMap(timeInAnimation -animateBtime , 0,
+//                   animateAtime, 0,1, true);  // the minus animateBtime is cause b is assumed first
+//float bpct = ofMap(timeInAnimation, 0,
+//                   animateBtime, 0,1, true);
+//float cpct = ofMap(timeInAnimation+1, 0,
+//                   animateBtime, 0,1, true);
+//float a = ofMap(apct, 0,1,0,100); // what do these numbers mean?
+//float b = ofMap(bpct, 0,1,0,100);
+//float c = ofMap(cpct, 0,1,0,100);
+//ofLine(600,b,600,c);
+//ofSetColor(MedAqua);
+//ofLine(590,a,590,b);
+//ofSetColor(Pink);
+//ofLine(500,b,500,a);
+//ofLine(510,a,510,b);
+//}
 
 //-----------------HI------------------------------------------------------
 
@@ -156,72 +156,72 @@ ofPushMatrix();
 ofPopMatrix();
 }
 
-void ofApp::drawanL(float xPos, float yPos, float scale){
-    
-ofPushMatrix(); // we're going to push this thing
-    ofTranslate(xPos, yPos); // push it this far. Why is this a variable and not a fixed number?
-    ofScale(scale, scale); //scale it this much
-    ofNoFill();
-    ofSetColor(myOutlines);
-    ofSetLineWidth(MyOutlineWidth);
-    ofBeginShape();
-    ofVertex(0,0);
-    ofVertex(30, 0);
-    ofVertex(30+(Mousereact/1.4),70);
-    ofVertex(90+(Mousereact),70);
-    ofVertex(90+Mousereact,100); // moved Mousereact parameters to update. Was this a good idea?
-    ofVertex(0+Mousereact,100);
-    ofVertex(0,0);
-    ofEndShape();
-ofPopMatrix();
-}
+//void ofApp::drawanL(float xPos, float yPos, float scale){
+//    
+//ofPushMatrix(); // we're going to push this thing
+//    ofTranslate(xPos, yPos); // push it this far. Why is this a variable and not a fixed number?
+//    ofScale(scale, scale); //scale it this much
+//    ofNoFill();
+//    ofSetColor(myOutlines);
+//    ofSetLineWidth(MyOutlineWidth);
+//    ofBeginShape();
+//    ofVertex(0,0);
+//    ofVertex(30, 0);
+//    ofVertex(30+(Mousereact/1.4),70);
+//    ofVertex(90+(Mousereact),70);
+//    ofVertex(90+Mousereact,100); // moved Mousereact parameters to update. Was this a good idea?
+//    ofVertex(0+Mousereact,100);
+//    ofVertex(0,0);
+//    ofEndShape();
+//ofPopMatrix();
+//}
 
 
-//--------------------------draw a U--------
-void ofApp::drawaU(float xPos, float yPos, float scale){
-ofPushMatrix();
-    ofTranslate(xPos, yPos); // push it this far. Why is this a variable and not a fixed number?
-    ofScale(scale, scale); //scale it this much
-    ofFill();
-    ofRect(0,0,25,50);
-    ofRect(75, 0, 25, 50);
-    ofCircle(50,50,50);
-ofPopMatrix();
-}
+////--------------------------draw a U--------
+//void ofApp::drawaU(float xPos, float yPos, float scale){
+//ofPushMatrix();
+//    ofTranslate(xPos, yPos); // push it this far. Why is this a variable and not a fixed number?
+//    ofScale(scale, scale); //scale it this much
+//    ofFill();
+//    ofRect(0,0,25,50);
+//    ofRect(75, 0, 25, 50);
+//    ofCircle(50,50,50);
+//ofPopMatrix();
+//}
 
-// draw an M --------------------------
-void ofApp::drawanM(float xPos, float yPos, float scale){
-    ofTranslate(xPos, yPos); // push it this far. Why is this a variable and not a fixed number?
-    ofScale(scale, scale); //scale it this much
-    ofNoFill();
-    ofSetColor(myOutlines);
-    ofSetLineWidth(MyOutlineWidth);
-    ofBeginShape();
-    ofVertex(0,100);
-    ofVertex(50,0);
-    ofVertex(100,100);
-    ofVertex(80,100);
-    ofVertex(50,35);
-    ofVertex(20,100);
-    ofVertex(0,100);
-    ofEndShape();
-
-    ofPushMatrix();
-        ofTranslate(50, 00);
-        ofNoFill();
-        ofSetColor(myOutlines);
-        ofSetLineWidth(MyOutlineWidth);
-        ofBeginShape();
-        ofVertex(0,100);
-        ofVertex(50,0);
-        ofVertex(100,100);
-        ofVertex(80,100);
-        ofVertex(50,35);
-        ofVertex(20,100);
-        ofVertex(0,100);
-        ofEndShape();
-    ofPopMatrix();
-}
+//// draw an M --------------------------
+//void ofApp::drawanM(float xPos, float yPos, float scale){
+//    ofTranslate(xPos, yPos); // push it this far. Why is this a variable and not a fixed number?
+//    ofScale(scale, scale); //scale it this much
+//    ofNoFill();
+//    ofSetColor(myOutlines);
+//    ofSetLineWidth(MyOutlineWidth);
+//    ofBeginShape();
+//    ofVertex(0,100);
+//    ofVertex(50,0);
+//    ofVertex(100,100);
+//    ofVertex(80,100);
+//    ofVertex(50,35);
+//    ofVertex(20,100);
+//    ofVertex(0,100);
+//    ofEndShape();
+//
+//    ofPushMatrix();
+//        ofTranslate(50, 00);
+//        ofNoFill();
+//        ofSetColor(myOutlines);
+//        ofSetLineWidth(MyOutlineWidth);
+//        ofBeginShape();
+//        ofVertex(0,100);
+//        ofVertex(50,0);
+//        ofVertex(100,100);
+//        ofVertex(80,100);
+//        ofVertex(50,35);
+//        ofVertex(20,100);
+//        ofVertex(0,100);
+//        ofEndShape();
+//    ofPopMatrix();
+//}
 
 // ------------------- draw a circle with pink polka dots inside
 void ofApp::drawaPolkaDotO(float xPos, float yPos, float scale){
@@ -367,30 +367,30 @@ void ofApp::draw(){
     }
 
     
-//---------------------------black box at bottom of screen-------------------------------------------
-    ofSetColor(0);
-    ofRect(0,ofGetHeight()-100,ofGetWidth(),100);
-
-
-//-----------------------------Circle nav------------------------------------
-    ofColor myColor;    // create a color variable
-    int randomNumber = (int) ofRandom(0,100);
-    int navcirc;
-    int addcolor = 0;
-    float distance = 100;
-    int circlesTotal = 10;
-    int addedcolorR = 100;
-    int addedcolorG = 100;
-    int addedcolorB = 100;
-    for (navcirc = 0; navcirc < circlesTotal; navcirc++) {
-        ofSetColor(myColor);    // set the draw color to this.
-        myColor.setHsb(ofMap(navcirc, 0, circlesTotal, 0, 255), 190, 255);     // set it's color via hsb, map navcirc to 0 to 255 (ie, go one way around the circle during the for loop)
-        ofCircle(-60*navcirc+ofGetWidth()-40,ofGetHeight()-60,20);
-        int currentCircle = circlesTotal - navcirc;
-        ofSetColor(0);
-        NTSAkkhara.drawString(ofToString(currentCircle), -60*navcirc+ofGetWidth()-50,ofGetHeight()-50);
-        }
-    
+////---------------------------black box at bottom of screen-------------------------------------------
+//    ofSetColor(0);
+//    ofRect(0,ofGetHeight()-100,ofGetWidth(),100);
+//
+//
+////-----------------------------Circle nav------------------------------------
+//    ofColor myColor;    // create a color variable
+//    int randomNumber = (int) ofRandom(0,100);
+//    int navcirc;
+//    int addcolor = 0;
+//    float distance = 100;
+//    int circlesTotal = 10;
+//    int addedcolorR = 100;
+//    int addedcolorG = 100;
+//    int addedcolorB = 100;
+//    for (navcirc = 0; navcirc < circlesTotal; navcirc++) {
+//        ofSetColor(myColor);    // set the draw color to this.
+//        myColor.setHsb(ofMap(navcirc, 0, circlesTotal, 0, 255), 190, 255);     // set it's color via hsb, map navcirc to 0 to 255 (ie, go one way around the circle during the for loop)
+//        ofCircle(-60*navcirc+ofGetWidth()-40,ofGetHeight()-60,20);
+//        int currentCircle = circlesTotal - navcirc;
+//        ofSetColor(0);
+//        NTSAkkhara.drawString(ofToString(currentCircle), -60*navcirc+ofGetWidth()-50,ofGetHeight()-50);
+//        }
+//    
 
     
     
@@ -416,11 +416,11 @@ void ofApp::draw(){
    
 //--------------------main draw stuff-------------------------
     
-ofSetColor(255);
-NTSAkkhara.drawString(eventString, 600,50); // id like to have this type's width be ofGetWidth()/2 but it doesnt seem to be centered, i  think because the line of type's axis point is not in the center, but in the top left.
-
-img.draw(600,400,400,600); // draw cage's rules
-FU.draw(mouseX, mouseY, 40,40); // draw afuck you sign
+//ofSetColor(255);
+//NTSAkkhara.drawString(eventString, 600,50); // id like to have this type's width be ofGetWidth()/2 but it doesnt seem to be centered, i  think because the line of type's axis point is not in the center, but in the top left.
+//
+//img.draw(600,400,400,600); // draw cage's rules
+//FU.draw(mouseX, mouseY, 40,40); // draw afuck you sign
     
 
 

@@ -39,6 +39,8 @@ class ofApp : public ofBaseApp{
     ofColor pink;
     ofColor purple;
     
+    ofPoint circlePos1, circlePos2, circlePos3, circlePos4, circlePos5, circlePos6, circlePos7;
+    
     // let's make a vector of them
     vector <particle> particles;
     vector <spring> springs;
