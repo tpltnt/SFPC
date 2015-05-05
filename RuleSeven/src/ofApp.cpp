@@ -12,14 +12,13 @@ void ofApp::setup(){
     blue.setHsb(133,138,214);
     pink.setHsb(4,43,237);
     sprintf(WORK, "WORK");
-    IntroBlackLrg.loadFont("Intro Black.otf", 40); //font size
+    IntroBlackLrg.loadFont("Intro Black.otf", 70); //font size
     sprintf(ThereisOnly, "THE ONLY RULE IS");
-    IntroBlack.loadFont("Intro Black.otf", 20); //font size
+    IntroBlack.loadFont("Intro Black.otf", 50); //font size
   
     
     scribbles.loadMovie("ScribblesonWhite.mov");
     scribbles.setLoopState(OF_LOOP_NORMAL);
-    //video.setSpeed(0.4);
     scribbles.play();
     
     videoone.loadMovie("RuleSevenVideoOne.mov");
@@ -43,10 +42,16 @@ void ofApp::setup(){
     videofive.setLoopState(OF_LOOP_NORMAL);
     videofive.play();
     
+    videosix.loadMovie("RuleSevenVideoSix.mov");
+    videosix.setLoopState(OF_LOOP_NORMAL);
+    videosix.play();
+
+    
     allofthetime.loadImage("allofthetime.png");
     arrow.loadImage("arrow.png");
     RuleSevenBG.loadImage("RuleSevenBG.png");
     ifyouwork.loadImage("ifyouwork.png");
+    itwilllead.loadImage("itwilllead.png");
     itspeople.loadImage("itspeople.png");
     tosomething.loadImage("toSomething.png");
     whoeventually.loadImage("whoeventually.png");
@@ -65,7 +70,8 @@ void ofApp::update(){
     videotwo.update();
     videothree.update();
     videofour.update();
-     videofive.update();
+    videofive.update();
+    videosix.update();
     
 
 
@@ -76,7 +82,7 @@ void ofApp::draw(){
     float iywmove = 10*ofGetElapsedTimef();
     ofSetColor(green);
     ofRect(30,110,350,200);
-    ofSetColor(green);
+    ofSetColor(tan);
     ofRect(990,340,350,200);
     ofSetColor(blue);
     ofRect(690,560,340,200);
@@ -86,36 +92,25 @@ void ofApp::draw(){
     ofRect(690,110,340,200);
     ofSetColor(pink);
     ofRect(30,560,340,200);
+    
     ofSetColor(brown);
-    ifyouwork.draw(iywmove,150,627/2,177/2);
-    allofthetime.draw(40,620,383/2,231/2);
-    itspeople.draw(1030,345,530/2.2,392/2.2);
+    ifyouwork.draw(64,160,627/2.5,177/2.5 );
+    itwilllead.draw(780,140,221/2,305/2);
+    allofthetime.draw(85,605,383/2,231/2);
+    itspeople.draw(1035,345,530/2.2,392/2.2);
     tosomething.draw(410,365,368/2,270/2);
 
     ofSetColor(255);
-    videoone.draw(350,110,350,200);
-    videotwo.draw(990,110,350,200);
+    videoone.draw(350,110,350,200); //illustrator
+    videotwo.draw(350,750,350,200); //OF forum
     videothree.draw(680,340,350,200);
     videofour.draw(340,540,330,200);
     videofive.draw(40,340,330,200);
+    videosix.draw(1000,110,330,200); //taeyoon Goldberg
     
     
     ofSetColor(255);
     RuleSevenBG.draw(0,0,ofGetWidth(),ofGetHeight());
-    
-//    // --------------background with code--------------------
-//    ofBackground(255);
-//    ofSetColor( ofColor::lightBlue);
-//    ofSetLineWidth(1);
-//    for (int i = 0; i < ofGetWidth(); i = i + 20){
-//        ofLine(i,0,i, ofGetHeight());
-//        
-//    }
-//    
-//    for (int i = 0; i < ofGetHeight(); i = i + 20){
-//        ofLine(0, i, ofGetWidth(), i);
-//    }
-//    
     
 
     
@@ -146,39 +141,40 @@ void ofApp::draw(){
     
     float scale =  1; //ofMap( sin(ofGetElapsedTimef()), -1, 1, 0.4, 3);
     
-    tempMesh.addVertex( ofPoint(x,y));
-    tempMesh.addTexCoord(ofPoint(x,y) * scale+ ofPoint(mouseX, mouseY));
-    
-    
-    for (int i = 0; i < 100; i++){
-        
-        float angle = ofMap(i, 0, 100-1, 0, TWO_PI);
-        
-        ofPoint pos;
-        pos.x = x + r * cos(angle);
-        pos.y = y + r * sin(angle);
-        
-        tempMesh.addVertex(pos);
-        tempMesh.addTexCoord(pos); // i dont know what to put here to just make it track the arrow
-
-//        tempMesh.addTexCoord(pos*scale + ofPoint(mouseX, mouseY)
-//        + ofPoint(ofRandom(-10, 10), ofRandom(-10,10))); // this is a crazy thing I dont understand
-//        ofVec2f(0, RuleEightLeftVertex));
-        
-    }
-    
-    
-    scribbles.getTextureReference().bind();
-    tempMesh.draw();
-    scribbles.getTextureReference().unbind(); //bind this movie to the mesh
+//    tempMesh.addVertex( ofPoint(x,y));
+//    tempMesh.addTexCoord(ofPoint(x,y) * scale+ ofPoint(mouseX, mouseY));
+//    
+//    
+//    for (int i = 0; i < 100; i++){
+//        
+//        float angle = ofMap(i, 0, 100-1, 0, TWO_PI);
+//        
+//        ofPoint pos;
+//        pos.x = x + r * cos(angle);
+//        pos.y = y + r * sin(angle);
+//        
+//        tempMesh.addVertex(pos);
+//        tempMesh.addTexCoord(pos);
+//        
+//    }
+//    
+//    scribbles.getTextureReference().bind();
+//    tempMesh.draw();
+//    scribbles.getTextureReference().unbind(); //bind this movie to the mesh
     
     
     
-    IntroBlack.drawString(ThereisOnly, mouseX-100,mouseY+25); //type the words
-//    arrow.draw(mouseX, mouseY,50,60);
+    ofPushMatrix();
+    ofTranslate(-100,0);
+    ofSetColor(brown);
+    IntroBlack.drawString(ThereisOnly, mouseX-100,mouseY+25);
    
-    IntroBlackLrg.drawString(WORK, mouseX-30,mouseY+70);
+    IntroBlackLrg.drawString(WORK, mouseX+100,mouseY+100);
    
+    ofPopMatrix();
+    
+    
+    
     
     ofSetLineWidth(3);
     ofSetColor(255,0,0);
@@ -217,6 +213,7 @@ void ofApp::keyPressed(int key){
         videothree.setSpeed(videothree.getSpeed()+0.1);
         videofour.setSpeed(videofour.getSpeed()+0.1);
         videofive.setSpeed(videofive.getSpeed()+0.1);
+        videosix.setSpeed(videofive.getSpeed()+0.1);
     }
     
     if (key == '-'){
@@ -225,6 +222,7 @@ void ofApp::keyPressed(int key){
         videothree.setSpeed(videothree.getSpeed()-0.1);
         videofour.setSpeed(videofour.getSpeed()-0.1);
         videofive.setSpeed(videofive.getSpeed()-0.1);
+        videosix.setSpeed(videofive.getSpeed()-0.1);
     }
 
 }

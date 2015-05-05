@@ -56,7 +56,7 @@ class ofApp : public ofBaseApp{
     
     
     ofVideoPlayer scribbles;
-    ofVideoPlayer videoone, videotwo, videothree, videofour, videofive;
+    ofVideoPlayer videoone, videotwo, videothree, videofour, videofive, videosix;
     
     ofTrueTypeFont 	IntroBlack;
     ofTrueTypeFont 	IntroBlackLrg;
@@ -75,7 +75,7 @@ class ofApp : public ofBaseApp{
     ofImage RuleSevenBG;
     ofImage ifyouwork;
     ofImage allofthetime;
-    ofImage itspeople, tosomething, whoeventually;
+    ofImage itspeople, tosomething, whoeventually, itwilllead;
     
 
  
