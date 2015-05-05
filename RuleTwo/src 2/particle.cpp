@@ -265,8 +265,8 @@ void particle::update(){
 
 //------------------------------------------------------------
 void particle::draw(){
-//    ofSetColor(73,66,54);
-//    ofCircle(pos.x, pos.y, 10);
+    ofSetColor(73,66,54);
+    ofCircle(pos.x, pos.y, 10);
     ofSetColor(255);
     Head.draw(pos.x-40, pos.y-30,95,120);
     ofSetColor(73,66,54);

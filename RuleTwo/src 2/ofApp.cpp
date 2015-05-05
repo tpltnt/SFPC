@@ -3,35 +3,19 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    colors[0].set(224,103,99); //coral
-    colors[1].set(140,207,160); //green
-    colors[2].set(98,196,215); //teal
-    colors[3].set(243,167,153); //salmon
-    colors[4].set(236,214,95); //yellow
-    colors[5].set(150,107,138); //purple
-    colors[6].set(91,116,183); //drkblue
+    colors[0].setHsb(0,140,224);
+    colors[1].setHsb(30,58,234); // (x/360*255, x/100*255, x/100*255)
+    colors[2].setHsb(30,96,63);
+    colors[3].setHsb(34,150,234);
+    colors[4].setHsb(49,127,219);
+    colors[5].setHsb(157,127,181);
+    colors[6].setHsb(133,138,214);
     
-   
-    string name;
-
     for (int i = 0; i < 7; i++){
         opactity[i] = 0;
-//        FILENAME = ("Art" + ofToString[i]);
-        name = "Art" + ofToString(i) + ".png";
-        Art[i].loadImage(name);
-//        myImg.loadImage(name);
-           cout << name << endl;
-//        name.loadImage("FILENAME");
-        }
-
+    }
     
-//    Art7.loadImage("Art7.png");
-//    Art6.loadImage("Art6.png");
-//    Art5.loadImage("Art5.png");
-//    Art4.loadImage("Art4.png");
-//    Art3.loadImage("Art3.png");
-//    Art2.loadImage("Art2.png");
-//    Art1.loadImage("Art1.png");
+    //colors[7].setHsb(4,43,237);
     Head.loadImage("Head.png");
     Ring.loadImage("Circle.png");
     PullEverything.loadImage("PullEverything.png");
@@ -48,7 +32,7 @@ void ofApp::setup(){
     }
     
     particles[0].bFixed = true;
-
+    
     
     for (int i = 1; i < particles.size(); i++){
         spring mySpring;
@@ -59,33 +43,39 @@ void ofApp::setup(){
         springs.push_back(mySpring);
     }
 
-
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     
+    // on every frame
+    // we reset the forces
+    // add in any forces on the particle
+    // perfom damping and
+    // then update
     
     for (int i = 0; i < particles.size(); i++){
         particles[i].resetForce();
     }
     
     for (int i = 0; i < particles.size(); i++){
-        particles[i].addRepulsionForce(mouseX, mouseY, 200, 1.0f);
+        
+        particles[i].addRepulsionForce(mouseX, mouseY, 200, 0.7f);
+        
         for (int j = 0; j < i; j++){
             particles[i].addRepulsionForce(particles[j], 20, 0.03);
-            }
         }
+    }
     
     for (int i = 0; i < springs.size(); i++){
         springs[i].update();
-        }
+    }
     
     
     for (int i = 0; i < particles.size(); i++){
         particles[i].addDampingForce();
         particles[i].update();
-        }
+    }
 
 
 }
@@ -93,27 +83,15 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-//------draw gridded paper and type--------------------
-    ofBackground(255);
-    ofSetColor( ofColor::lightBlue);
-    ofSetLineWidth(1);
-    for (int i = 0; i < ofGetWidth(); i = i + 20){
-        ofLine(i,0,i, ofGetHeight());
-        }
-    for (int i = 0; i < ofGetHeight(); i = i + 20){
-        ofLine(0, i, ofGetWidth(), i);
-        }
-    ofSetColor(76,68,56);
-    GeneralDuties.draw(450,390,435,53);
-    PullEverything.draw(530,450,426,117);
-    
-    
-    
-//----------variables for circles------------------------------------------
+    //----------variables for circles-------------------------------------------------
     
     int opacityPressed;
-    int circleRad = 170;
+
+    int circleRad = 150;
     int FillCircleRad = circleRad-3;
+    
+
+    
     
     for (int i = 0; i < 7; i++){
         bool bAnyNotInMe = false;
@@ -137,23 +115,22 @@ void ofApp::draw(){
     float sinValueB = sin(ofGetElapsedTimef()*1.5);
     float cosinValue = cos(ofGetElapsedTimef()*2);
     
-   
-    CirclePos[0].x =490+sinValue*27; //coral
-    CirclePos[0].y =690+cosinValue*17;
-    CirclePos[1].x =210+sinValueB*17; //green
-    CirclePos[1].y =290+cosinValue*17;
-    CirclePos[2].x =900+sinValue*27; //teal
-    CirclePos[2].y =200+cosinValue*27;
-    CirclePos[3].x =1140+sinValue*27; //salmon
-    CirclePos[3].y =630+cosinValue*-37;
-    CirclePos[4].x =1200+sinValueB*27; //yellow
-    CirclePos[4].y =320+cosinValue*-37;
-    CirclePos[5].x =170+sinValueB*27; //purple
+    CirclePos[0].x =490+sinValue*27;
+    CirclePos[0].y =490+cosinValue*17;
+    CirclePos[1].x =190+sinValueB*17;
+    CirclePos[1].y =190+cosinValue*17;
+    CirclePos[2].x =790+sinValue*27;
+    CirclePos[2].y =190+cosinValue*27;
+    CirclePos[3].x =990+sinValueB*27;
+    CirclePos[3].y =590+cosinValue*-37;
+    CirclePos[4].x =1100+sinValueB*27;
+    CirclePos[4].y =90+cosinValue*-37;
+    CirclePos[5].x =90+sinValueB*27;
     CirclePos[5].y =600+cosinValue*-37;
-    CirclePos[6].x =530+sinValue*27; //drk blue
-    CirclePos[6].y =180+cosinValue*17;
-  
+    CirclePos[6].x =400+sinValue*27;
+    CirclePos[6].y =110+cosinValue*17;
 
+    
     ofSetRectMode(OF_RECTMODE_CENTER);
     
     for (int i = 0; i < 7; i++){
@@ -161,15 +138,49 @@ void ofApp::draw(){
         Ring.draw(CirclePos[i].x,CirclePos[i].y,circleRad*2,circleRad*2);
         ofSetColor(colors[i].r, colors[i].g, colors[i].b, opactity[i]);
         ofCircle(CirclePos[i],FillCircleRad);
-        ofSetColor(255);
-        Art[i].draw(CirclePos[i].x,CirclePos[i].y,circleRad*2,circleRad*2);
-        }
+    }
+    
+    //-----draw outer ring at 100% and circle at variable opacity------------
+//    ofSetColor(salmon); // red
+//    Ring.draw(ring1x,ring1y,circleRad*2,circleRad*2);
+//    ofSetColor(224,103,99,opacityPressed);
+//    ofCircle(circlePos1,FillCircleRad);
+//    
+//    ofSetColor(140,207,160); //green
+//    Ring.draw(ring2x,ring2y,circleRad*2,circleRad*2);
+//    ofSetColor(140,207,160,opacityPressed);
+//    ofCircle(circlePos2,FillCircleRad);
+//    
+//    ofSetColor(98,196,215); //bue
+//    Ring.draw(ring3x,ring3y,circleRad*2,circleRad*2);
+//    ofSetColor(98,196,215,opacityPressed);
+//    ofCircle(circlePos3,FillCircleRad);
+//    
+//    ofSetColor(91,116,183); //drkbue
+//    Ring.draw(ring4x,ring4y,circleRad*2,circleRad*2);
+//    ofSetColor(91,116,183,opacityPressed);
+//    ofCircle(circlePos4,FillCircleRad);
+//    
+//    ofSetColor(236,214,95); //yellow
+//    Ring.draw(ring5x,ring5y,circleRad*2,circleRad*2);
+//    ofSetColor(236,214,95,opacityPressed);
+//    ofCircle(circlePos5,FillCircleRad);
+//    
+//    ofSetColor(150,107,138); //purple
+//    Ring.draw(ring6x,ring6y,circleRad*2,circleRad*2);
+//    ofSetColor(150,107,138,opacityPressed);
+//    ofCircle(circlePos6,FillCircleRad);
+//    
+//    ofSetColor(243,167,153); //pink
+//    Ring.draw(ring7x,ring7y,circleRad*2,circleRad*2);
+//    ofSetColor(243,167,153,opacityPressed);
+//    ofCircle(circlePos7,FillCircleRad);
     
     ofSetRectMode(OF_RECTMODE_CORNER);
-   
-
-//---------------springs and  particles----------------
-    ofSetColor(76,68,56);
+    
+    
+    //---------------springs and  particles----------------
+    ofSetColor(ofColor::brown);
     for (int i = 0; i < particles.size(); i++){
         particles[i].draw();
     }
@@ -178,11 +189,13 @@ void ofApp::draw(){
         springs[i].draw();
     }
     
-    
+
+
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    
     
     switch (key){
             
@@ -190,7 +203,7 @@ void ofApp::keyPressed(int key){
             // reposition everything:
             for (int i = 0; i < particles.size(); i++){
                 particles[i].setInitialCondition(ofRandom(0,ofGetWidth()),ofRandom(0,ofGetHeight()),0,0);
-            
+                
             }
             
             break;
@@ -212,23 +225,24 @@ void ofApp::mouseMoved(int x, int y ){
 void ofApp::mouseDragged(int x, int y, int button){
     
     particles[0].pos.set(mouseX, mouseY);
-   
+    
     /*particles.erase(particles.begin());
      particle myParticle;
      myParticle.setInitialCondition(x,y,0,0);
      particles.push_back(myParticle);*/
+    
 
 
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-//particles[0].bFixed = true;
+
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-//particles[0].bFixed = false;
+
 }
 
 //--------------------------------------------------------------

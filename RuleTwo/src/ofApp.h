@@ -28,22 +28,23 @@ class ofApp : public ofBaseApp{
     ofImage Ring;
     ofImage GeneralDuties;
     ofImage PullEverything;
+
+    ofColor colors[7];
+    ofPoint CirclePos[7];
     
-    ofColor salmon;
-    ofColor tan;
-    ofColor yellow;
-    ofColor brown;
-    ofColor green;
-    ofColor royal;
-    ofColor blue;
-    ofColor pink;
-    ofColor purple;
+    ofImage Art[7];
+     string str = "Art";
+    ofImage myImg;
+//    ofImage Art1, Art2, Art3, Art4, Art5, Art6, Art7;
+    float opactity[7];
+  
     
-    ofPoint circlePos1, circlePos2, circlePos3, circlePos4, circlePos5, circlePos6, circlePos7;
     
-    // let's make a vector of them
+    
+    // let's make a vector of the particles
     vector <particle> particles;
     vector <spring> springs;
+    
     
 		
 };
