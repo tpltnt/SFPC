@@ -118,7 +118,7 @@ void ofApp::draw(){
 
         
                                
-    //-----manually------------------
+    //-----manually--make two circles----------------
     
     //    ofPushMatrix();
     //    ofBeginShape();

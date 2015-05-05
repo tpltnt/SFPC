@@ -1,5 +1,7 @@
 #include "ofApp.h"
 
+static string voices[24] = {"Agnes", "Albert", "Alex", "Bad News", "Bahh", "Bells", "Boing", "Bruce", "Bubbles", "Cellos", "Deranged", "Fred", "Good News", "Hysterical", "Junior", "Kathy", "Pipe Organ", "Princess", "Ralph", "Trinoids", "Vicki", "Victoria", "Whisper", "Zarvox"};
+
 //--------------------------------------------------------------
 void ofApp::setup(){
     
@@ -35,12 +37,61 @@ void ofApp::setup(){
         }
         
     }
+    
+    voice = "Agnes";
+    bRandomVoice = false;
+    
+    // load the lyrics from a text file and split them
+    // up in to a vector of strings
+    string lyrics = ofBufferFromFile("Nothing.txt").getText();
+    step = 0;
+    words = ofSplitString(lyrics, " ");
+    
+    // we are running the systems commands
+    // in a sperate thread so that it does
+    // not block the drawing
+    startThread();
+
 
 
 }
 
 //--------------------------------------------------------------
+void ofApp::threadedFunction() {
+    
+    while (isThreadRunning()) {
+        
+        
+        // call the system command say
+        
+#ifdef TARGET_OSX
+        string cmd = "say -v "+voice+" "+words[step]+" ";   // create the command
+        system(cmd.c_str());
+#endif
+#ifdef TARGET_WIN32
+        string cmd = "data\\SayStatic.exe "+words[step];   // create the command
+        cout << cmd << endl;
+        system(cmd.c_str());
+#endif
+        
+        
+        
+        // step to the next word
+        step ++;
+        step %= words.size();
+        
+        // slowdown boy
+        ofSleepMillis(10);
+    }
+}
+
+//--------------------------------------------------------------
 void ofApp::update(){
+    
+    // get a random voice
+    if(bRandomVoice) {
+        voice = voices[(int)ofRandom(24)];
+    }
 
 }
 
@@ -60,23 +111,16 @@ void ofApp::draw(){
         ofLine(0, i, ofGetWidth(), i);
     }
 
-    
-    
-    
-    // the total width on the line
     int strWidth = (seussLines[lineCount].length()*25) ;
-    
     // x and y for the drawing
     float x = (ofGetWidth()-strWidth)/2;
     float y = ofGetHeight()/2;
-    
-    
+  
     // we are slowy grabbing part of the line
     string typedLine = seussLines[lineCount].substr(0, letterCount);
     
-    // draw the line
     ofSetColor(243,167,153);
-    ofRect(x, y-30, strWidth, 55);
+    ofRect(x-10, y-30, strWidth, 55);
     ofSetColor(255);
     IntroBlack.drawString(typedLine, x+4, y+11);
     
@@ -116,7 +160,21 @@ void ofApp::draw(){
 }
 
 //--------------------------------------------------------------
+void ofApp::exit() {
+    // stop the thread on exit
+    waitForThread(true);
+}
+
+//--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    
+    if(key == 'r') {
+        bRandomVoice = !bRandomVoice;
+    }
+    
+    if(key == ' ') {
+        voice = voices[(int)ofRandom(24)];
+    }
 
 }
 

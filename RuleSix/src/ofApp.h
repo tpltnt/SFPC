@@ -2,12 +2,17 @@
 
 #include "ofMain.h"
 
-class ofApp : public ofBaseApp{
+class ofApp : public ofBaseApp, public ofThread{
 
 	public:
-		void setup();
-		void update();
-		void draw();
+    
+    void setup();
+    void update();
+    void draw();
+    void exit();
+        void threadedFunction();
+
+		
 
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -20,9 +25,16 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
    
         float           nextLetterTime;
-    int             lineCount;
-    int             letterCount;
-    vector <string> seussLines;
-     ofTrueTypeFont 	IntroBlack;
+        int             lineCount;
+        int             letterCount;
+        vector <string> seussLines;
+        ofTrueTypeFont 	IntroBlack;
+    
+    
+    vector <string> words;
+    int step;
+    
+    bool bRandomVoice;
+    string voice;
 		
 };
