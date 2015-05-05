@@ -27,6 +27,7 @@ class ofApp : public ofBaseApp{
     ofImage     rockImage;
     ofPolyline  line;
     ofShader    shader;
+    vector < ofPolyline > myLines;
     
 
     Student myStudents[NSTUDENTS]; //call the class Student, call it 'myStudent', and i'm not sure what NSTUDENTS is really saying
