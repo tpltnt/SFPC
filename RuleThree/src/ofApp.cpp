@@ -38,16 +38,16 @@ void ofApp::setup(){
         cout << angle2 << endl;
         
         
-        if (angle2 >= 0 && angle2 < 60){
+        if (angle2 >= 0 && angle2 < 40){
             fileName = "studentD.png";
-        } else if (angle2 >= 60 && angle2 < 120){
+        } else if (angle2 >= 40 && angle2 < 130){
             fileName = "studentF.png";
-        } else if (angle2 >= 120 && angle2 < 180){
+        } else if (angle2 >= 130 && angle2 < 180){
             fileName = "studentC.png";
         } else if (angle2 < 0 && angle2 >= -60){
                 fileName = "studentB.png";
         } else if (angle2 < -60 && angle2 >= -120){ // -60  --120
-            fileName = "studentD.png";
+            fileName = "studentB.png";
         } else if (angle2 < -120 && angle2 >= -180){
             fileName = "studentE.png";
       }
@@ -64,22 +64,13 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    // for all students, move towards this point
     if (ofGetMousePressed()){
         for(int i=0; i<NSTUDENTS; i++){
-        myStudents[i].moveTowards(645, 366);
+        myStudents[i].moveTowards(645, 366); //center point of artowkr
         
         }
     }
-//    if (ofGetMousePressed()){
-//        for(int i=0; i<NSTUDENTS; i++){
-//            if(ofRandom(0,1) > 0.5) {
-//                myStudents[i].moveTowards(645, 366, ofRandom(100,1000));
-//            } else {
-//                myStudents[i].moveTowardsB(645, 366, ofRandom(100,1000));
-//                    }
-//                }
-//            }
+
 }
 
 //--------------------------------------------------------------
@@ -100,23 +91,16 @@ void ofApp::draw(){
 
 //    lineFbo.begin();
     ofSetColor(salmon);
-    ofSetLineWidth(7);
-    line.draw(); // this is the main line for the user
+    ofSetLineWidth(6);
+
+    for (int i =0; i < myLines.size(); i++) {
+        myLines[i].draw();
+    }
+    
+    line.draw();
 //    lineFbo.end();
   
     
- //-----shader not woring, eventhough in data/bin, abandoning it for now-----------
-//    shader.begin();
-//    
-//    shader.setUniformTexture("tex0",lineFbo, 0 );
-//    shader.setUniformTexture("tex1",rockImage.getTextureReference(), 1 ); //i think I need to call these earlier somewhere up top with a #
-//    
-//    ofSetColor(255);
-//    
-//    lineFbo.draw(0,0);
-//    shader.end();
-
-   
     //--------call student class-------------------
     ofSetColor(255);
     for(int i=0; i<NSTUDENTS; i++){
@@ -130,7 +114,7 @@ void ofApp::draw(){
     
 
     ofSetColor(255);
-    TaeyoonTeaching.draw(450,242,442,612);
+    TaeyoonTeaching.draw(455,242,442,612);
 
 
 }
@@ -155,7 +139,7 @@ void ofApp::mouseMoved(int x, int y ){
 void ofApp::mouseDragged(int x, int y, int button){
     
        if (mouseX > 484 && mouseX < 800 && mouseY <474 && mouseY > 300){
-    line.addVertex(ofPoint(x,y));
+    line.addVertex(x,y);
              }
 
     cout << mouseX << endl;
@@ -165,11 +149,17 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
+    
+    
+    line.clear();
+    line.addVertex(x,y);
+    
 
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
+    myLines.push_back(line);
 
 }
 
