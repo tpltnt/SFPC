@@ -20,21 +20,31 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-    ofxPanel panelA;
-    ofParameter <int> peaksA;
-    ofParameter <float> amplitudeA;
-    ofParameter <float> radiusA;
-    ofParameter <float> noiseModFactorA;
-    ofParameter <float> velocityA;
-    ofParameter <float> LineWeightA;
+    ofxPanel panel[8];
+    ofParameter <int> peaks[8];
+    ofParameter <float> amplitude[8];
+    ofParameter <float> radius[8];
+    ofParameter <float> noiseModFactor[8];
+    ofParameter <float> velocity[8];
+    ofParameter <float> LineWeight[8];
     
-    ofxPanel panelB;
-    ofParameter <int> peaksB;
-    ofParameter <float> amplitudeB;
-    ofParameter <float> radiusB;
-    ofParameter <float> noiseModFactorB;
-    ofParameter <float> velocityB;
-     ofParameter <float> LineWeightB;
+    
+    
+//    ofxPanel panelA;
+//    ofParameter <int> peaksA;
+//    ofParameter <float> amplitudeA;
+//    ofParameter <float> radiusA;
+//    ofParameter <float> noiseModFactorA;
+//    ofParameter <float> velocityA;
+//    ofParameter <float> LineWeightA;
+//    
+//    ofxPanel panelB;
+//    ofParameter <int> peaksB;
+//    ofParameter <float> amplitudeB;
+//    ofParameter <float> radiusB;
+//    ofParameter <float> noiseModFactorB;
+//    ofParameter <float> velocityB;
+//     ofParameter <float> LineWeightB;
     
     ofTrueTypeFont 	IntroBlack;
     ofTrueTypeFont 	IntroBlackLrg;

@@ -16,22 +16,13 @@ void ofApp::setup(){
 
     for (int i = 0; i < 7; i++){
         opactity[i] = 0;
-//        FILENAME = ("Art" + ofToString[i]);
         name = "Art" + ofToString(i) + ".png";
         Art[i].loadImage(name);
-//        myImg.loadImage(name);
-           cout << name << endl;
-//        name.loadImage("FILENAME");
+        cout << name << endl;
+
         }
 
-    
-//    Art7.loadImage("Art7.png");
-//    Art6.loadImage("Art6.png");
-//    Art5.loadImage("Art5.png");
-//    Art4.loadImage("Art4.png");
-//    Art3.loadImage("Art3.png");
-//    Art2.loadImage("Art2.png");
-//    Art1.loadImage("Art1.png");
+
     Head.loadImage("Head.png");
     Ring.loadImage("Circle.png");
     PullEverything.loadImage("PullEverything.png");
