@@ -88,10 +88,10 @@ void ofApp::draw(){
     ofBackground(255);
     ofSetColor( ofColor::lightBlue);
     ofSetLineWidth(1);
-    for (unsigned int i = 0; i < ofGetWidth(); i = i + 20){
+    for (int i = 0; i < ofGetWidth(); i = i + 20){
         ofLine(i,0,i, ofGetHeight());
         }
-    for (unsigned int i = 0; i < ofGetHeight(); i = i + 20){
+    for (int i = 0; i < ofGetHeight(); i = i + 20){
         ofLine(0, i, ofGetWidth(), i);
         }
     ofSetColor(76,68,56);
