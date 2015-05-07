@@ -40,6 +40,6 @@ class ofApp : public ofBaseApp{
 
         // let's make a vector of the particles
         vector <particle> particles;
-        vector <spring> springs;		
+        vector <spring> springs;
 };
 #endif
