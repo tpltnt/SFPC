@@ -14,7 +14,7 @@ void ofApp::setup(){
    
     string name;
 
-    for (int i = 0; i < 7; i++){
+    for (unsigned int i = 0; i < 7; i++){
         opactity[i] = 0;
         name = "Art" + ofToString(i) + ".png";
         Art[i].loadImage(name);
@@ -32,7 +32,7 @@ void ofApp::setup(){
     ofSetFrameRate(60);
     
     
-    for (int i = 0; i < 8; i++){ //draw all 8 particles
+    for (unsigned int i = 0; i < 8; i++){ //draw all 8 particles
         particle myParticle;
         myParticle.setInitialCondition(ofRandom(500,550),ofRandom(500,550),0,0); //
         particles.push_back(myParticle);
@@ -41,7 +41,7 @@ void ofApp::setup(){
     particles[0].bFixed = true;
 
     
-    for (int i = 1; i < particles.size(); i++){
+    for (unsigned int i = 1; i < particles.size(); i++){
         spring mySpring;
         mySpring.distance		= 200;
         mySpring.springiness	= 0.05f;
@@ -57,23 +57,23 @@ void ofApp::setup(){
 void ofApp::update(){
     
     
-    for (int i = 0; i < particles.size(); i++){
+    for (unsigned int i = 0; i < particles.size(); i++){
         particles[i].resetForce();
     }
     
-    for (int i = 0; i < particles.size(); i++){
+    for (unsigned int i = 0; i < particles.size(); i++){
         particles[i].addRepulsionForce(mouseX, mouseY, 200, 1.0f);
-        for (int j = 0; j < i; j++){
+        for (unsigned int j = 0; j < i; j++){
             particles[i].addRepulsionForce(particles[j], 20, 0.03);
             }
         }
     
-    for (int i = 0; i < springs.size(); i++){
+    for (unsigned int i = 0; i < springs.size(); i++){
         springs[i].update();
         }
     
     
-    for (int i = 0; i < particles.size(); i++){
+    for (unsigned int i = 0; i < particles.size(); i++){
         particles[i].addDampingForce();
         particles[i].update();
         }
@@ -88,10 +88,10 @@ void ofApp::draw(){
     ofBackground(255);
     ofSetColor( ofColor::lightBlue);
     ofSetLineWidth(1);
-    for (int i = 0; i < ofGetWidth(); i = i + 20){
+    for (unsigned int i = 0; i < ofGetWidth(); i = i + 20){
         ofLine(i,0,i, ofGetHeight());
         }
-    for (int i = 0; i < ofGetHeight(); i = i + 20){
+    for (unsigned int i = 0; i < ofGetHeight(); i = i + 20){
         ofLine(0, i, ofGetWidth(), i);
         }
     ofSetColor(76,68,56);
@@ -106,9 +106,9 @@ void ofApp::draw(){
     int circleRad = 170;
     int FillCircleRad = circleRad-3;
     
-    for (int i = 0; i < 7; i++){
+    for (unsigned int i = 0; i < 7; i++){
         bool bAnyNotInMe = false;
-        for (int j = 0; j < particles.size(); j++){
+        for (unsigned int j = 0; j < particles.size(); j++){
             if (  (CirclePos[i] - particles[j].pos).length() > FillCircleRad){
                 bAnyNotInMe = true;
             }
@@ -147,7 +147,7 @@ void ofApp::draw(){
 
     ofSetRectMode(OF_RECTMODE_CENTER);
     
-    for (int i = 0; i < 7; i++){
+    for (unsigned int i = 0; i < 7; i++){
         ofSetColor(colors[i]);
         Ring.draw(CirclePos[i].x,CirclePos[i].y,circleRad*2,circleRad*2);
         ofSetColor(colors[i].r, colors[i].g, colors[i].b, opactity[i]);
@@ -161,11 +161,11 @@ void ofApp::draw(){
 
 //---------------springs and  particles----------------
     ofSetColor(76,68,56);
-    for (int i = 0; i < particles.size(); i++){
+    for (unsigned int i = 0; i < particles.size(); i++){
         particles[i].draw();
     }
     
-    for (int i = 0; i < springs.size(); i++){
+    for (unsigned int i = 0; i < springs.size(); i++){
         springs[i].draw();
     }
     
@@ -179,7 +179,7 @@ void ofApp::keyPressed(int key){
             
         case ' ':
             // reposition everything:
-            for (int i = 0; i < particles.size(); i++){
+            for (unsigned int i = 0; i < particles.size(); i++){
                 particles[i].setInitialCondition(ofRandom(0,ofGetWidth()),ofRandom(0,ofGetHeight()),0,0);
             
             }
